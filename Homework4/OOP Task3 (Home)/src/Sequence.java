@@ -2,6 +2,7 @@ import java.util.Arrays;
 
 public class Sequence {
     //Создаем поля класса Sequence
+    private SequenceObserver sequenceObserver;
     private int number;
     private int index;
     private int value;
@@ -12,8 +13,8 @@ public class Sequence {
         this.value = value;
     }
 
-    public Sequence() {
-
+    public Sequence(SequenceObserver sequenceObserver) {
+        this.sequenceObserver = sequenceObserver;
     }
 
     // 3, 4, 5 -> removeByValue(5) -> 3, 4
@@ -21,6 +22,12 @@ public class Sequence {
     public void removeByValue(int value, int[] generateArray) {
         int [] newArray = new int[generateArray.length - 1];
         int count = 0;
+        for (int findNumber:generateArray) {
+            if(value == findNumber){
+                break;
+            }
+        }
+
         for(int j = 0; j < generateArray.length; j++){
             if(generateArray[j] != value){
                 newArray[count++] = generateArray[j];
@@ -28,6 +35,7 @@ public class Sequence {
         }
         Arrays.copyOfRange(newArray,0,count);
         System.out.println("------------------------------");
+        sequenceObserver.printRemoveByValue(value);
         System.out.println(Arrays.toString(newArray));
     }
 
@@ -43,6 +51,7 @@ public class Sequence {
         }
         Arrays.copyOfRange(newArray,0,count);
         System.out.println("------------------------------");
+        sequenceObserver.printRemoveByIndex(index);
         System.out.println(Arrays.toString(newArray));
     }
 
@@ -54,6 +63,7 @@ public class Sequence {
         }
         newArray[0] = number;
         System.out.println("------------------------------");
+        sequenceObserver.printAddNumber(number);
         System.out.println(Arrays.toString(newArray));
     }
 
@@ -69,6 +79,7 @@ public class Sequence {
         }
         newArray[index] = number;
         System.out.println("------------------------------");
+        sequenceObserver.printInsertNumber(index, number);
         System.out.println(Arrays.toString(newArray));
     }
 
@@ -82,6 +93,7 @@ public class Sequence {
             }
         }
         System.out.println("------------------------------");
+        sequenceObserver.printNumberGetByIndex(index);
         System.out.println(findNumber);
     }
 
@@ -95,7 +107,9 @@ public class Sequence {
             }
         }
         System.out.println("------------------------------");
+        sequenceObserver.printReplaceNumber(index, number);
         System.out.println(Arrays.toString(generateArray));
     }
+
 }
 
