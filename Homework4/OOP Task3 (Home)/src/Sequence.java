@@ -3,15 +3,8 @@ import java.util.Arrays;
 public class Sequence {
     //Создаем поля класса Sequence
     private SequenceObserver sequenceObserver;
-    private int number;
-    private int index;
-    private int value;
-
-    public Sequence(int number, int index, int value) {
-        this.number = number;
-        this.index = index;
-        this.value = value;
-    }
+    private SequenceResult sequenceResult;
+    private Sequence generateArray;
 
     public Sequence(SequenceObserver sequenceObserver) {
         this.sequenceObserver = sequenceObserver;
@@ -19,15 +12,9 @@ public class Sequence {
 
     // 3, 4, 5 -> removeByValue(5) -> 3, 4
     // удалить число из последовательности по значению
-    public void removeByValue(int value, int[] generateArray) {
+    public void removeByValue(int value) {
         int [] newArray = new int[generateArray.length - 1];
         int count = 0;
-        for (int findNumber:generateArray) {
-            if(value == findNumber){
-                break;
-            }
-        }
-
         for(int j = 0; j < generateArray.length; j++){
             if(generateArray[j] != value){
                 newArray[count++] = generateArray[j];
@@ -36,12 +23,12 @@ public class Sequence {
         Arrays.copyOfRange(newArray,0,count);
         System.out.println("------------------------------");
         sequenceObserver.printRemoveByValue(value);
-        System.out.println(Arrays.toString(newArray));
+        sequenceResult.showResultRemoveValue(newArray);
     }
 
     // 3, 4, 5 -> removeByIndex(1) -> 3, 5
     // удалить число из последовательности по индексу
-    public void removeByIndex(int index, int[] generateArray) {
+    public void removeByIndex(int index) {
         int [] newArray = new int[generateArray.length - 1];
         int count = 0;
         for(int j = 0; j < generateArray.length; j++){
@@ -52,11 +39,11 @@ public class Sequence {
         Arrays.copyOfRange(newArray,0,count);
         System.out.println("------------------------------");
         sequenceObserver.printRemoveByIndex(index);
-        System.out.println(Arrays.toString(newArray));
+        sequenceResult.showResultRemoveIndex(newArray);
     }
 
     // добавить число в последовательность
-    public void addNumberToSequence(int number, int[] generateArray) {
+    public void addNumberToSequence(int number) {
         int [] newArray = new int[generateArray.length + 1];
         for(int i = 0; i < newArray.length - 1; i++){
             newArray[i + 1] = generateArray[i];
@@ -64,11 +51,11 @@ public class Sequence {
         newArray[0] = number;
         System.out.println("------------------------------");
         sequenceObserver.printAddNumber(number);
-        System.out.println(Arrays.toString(newArray));
+        sequenceResult.showResultAddNumber(newArray);
     }
 
     // вставить элемент со сдвигом всех остальных - insert()
-    public void insertNumberToSequence(int index, int number, int[] generateArray) {
+    public void insertNumberToSequence(int index, int number) {
         int [] newArray = new int[generateArray.length + 1];
         for(int i = 0; i < newArray.length - 1; i++){
             if(i < index) {
@@ -80,11 +67,11 @@ public class Sequence {
         newArray[index] = number;
         System.out.println("------------------------------");
         sequenceObserver.printInsertNumber(index, number);
-        System.out.println(Arrays.toString(newArray));
+        sequenceResult.showResultInsertNumber(newArray);
     }
 
     // получить элемент по индексу
-    public void getNumberByIndex(int index, int[] generateArray) {
+    public void getNumberByIndex(int index) {
         int findNumber = -1;
         for(int j = 0; j < generateArray.length; j++){
             if(j == index){
@@ -94,11 +81,11 @@ public class Sequence {
         }
         System.out.println("------------------------------");
         sequenceObserver.printNumberGetByIndex(index);
-        System.out.println(findNumber);
+        sequenceResult.showResultNumberByIndex(findNumber);
     }
 
     // вставить элемент в индекс - replace()
-    public void replaceNumberToSequence(int index, int number, int[] generateArray) {
+    public void replaceNumberToSequence(int index, int number) {
         int findNumber = -1;
         for(int j = 0; j < generateArray.length; j++){
             if(j == index){
@@ -108,8 +95,7 @@ public class Sequence {
         }
         System.out.println("------------------------------");
         sequenceObserver.printReplaceNumber(index, number);
-        System.out.println(Arrays.toString(generateArray));
+        sequenceResult.showResultReplaceNumber(generateArray);
     }
-
 }
 
