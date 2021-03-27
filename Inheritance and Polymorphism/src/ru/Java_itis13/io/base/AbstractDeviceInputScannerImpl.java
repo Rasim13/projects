@@ -1,4 +1,4 @@
-package ru.Java_itis13.io;
+package ru.Java_itis13.io.base;
 
 import java.util.Scanner;
 

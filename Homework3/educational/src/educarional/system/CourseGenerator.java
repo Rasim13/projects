@@ -21,7 +21,7 @@ public class CourseGenerator {
     public Course[] getCourses(int n){
         Course[] courses = new Course[n];
         if(n > names.length)
-            throw new IllegalArgumentException("Can't gerenate courses.Not enough names");
+            throw new IllegalArgumentException("Can't generate courses.Not enough names");
         for (int i = 0; i < n; i++) {
             courses[i] = getCourse(i);
         }

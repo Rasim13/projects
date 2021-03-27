@@ -1,7 +1,6 @@
-package ru.Java_itis13.io;
+package ru.Java_itis13.io.impl;
 
 import ru.Java_itis13.io.base.DeviceOutput;
-
 import java.time.LocalDateTime;
 
 public class DeviceOutputWithTimeImpl implements DeviceOutput {

@@ -69,7 +69,9 @@ public class Course {
         if(students == null) return null;
         String result = "";
         for(Student student: students){
-
+            if(student != null){
+                result += student.getFullName() + " " + student.getAge() + " " + student.getGroupName();
+            }
         }
         return result;
     }

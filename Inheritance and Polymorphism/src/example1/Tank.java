@@ -1,3 +1,5 @@
+package example1;
+
 public class Tank extends MilitaryTransport{
 
    public Tank(double fuelAmount, double fuelConsumption, int bulletsCount){

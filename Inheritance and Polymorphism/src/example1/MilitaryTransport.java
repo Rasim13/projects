@@ -1,3 +1,5 @@
+package example1;
+
 public abstract class MilitaryTransport extends Transport{
     protected int bulletsCount;
 

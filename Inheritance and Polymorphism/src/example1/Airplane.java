@@ -1,3 +1,5 @@
+package example1;
+
 public class Airplane extends Transport{
 
     private int length;

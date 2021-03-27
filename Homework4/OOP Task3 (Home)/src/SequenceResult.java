@@ -1,7 +1,7 @@
 import java.util.Arrays;
 
+//Выводит результат операции
 public class SequenceResult {
-
     public void showResultAddNumber(int[] newArray){
         System.out.println(Arrays.toString(newArray));
     }
@@ -26,4 +26,7 @@ public class SequenceResult {
         System.out.println(Arrays.toString(generateArray));
     }
 
+    public void showNotValueByArray(){
+        System.out.println("В массиве нет такого значения");
+    }
 }

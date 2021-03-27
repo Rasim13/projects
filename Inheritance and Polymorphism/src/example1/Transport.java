@@ -1,3 +1,5 @@
+package example1;
+
 public abstract class Transport {
     private static final double DEFAULT_FUEL_AMOUNT = 0.1;
     private static final double DEFAULT_FUEL_CONSUMPTION = 0.1;

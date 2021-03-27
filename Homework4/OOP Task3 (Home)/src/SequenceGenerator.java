@@ -9,10 +9,10 @@ public class SequenceGenerator {
     }
 
     public Sequence generate(int size){
-        Sequence[] generateArray = new Sequence[size];
+        int[] generateArray = new int[size];
         for (int i = 0; i < generateArray.length; i++){
             generateArray[i] = random.nextInt(10);
         }
-        return generateArray;
+        return new Sequence(generateArray);
     }
 }

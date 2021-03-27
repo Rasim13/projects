@@ -61,13 +61,13 @@ public class Tutor {
         return "Tutor{" +
                 "fullName='" + fullName + '\'' +
                 ", age=" + age +
-                ", courses=" + Arrays.toString(courses) +
                 ", salary=" + salary +
                 '}';
     }
 
     public String getCoursesInfo() {
         if(courses == null) return null;
+        // TODO: 13.02.2021  переписать на StringBuffer
         String result = "";
         for (Course course: courses){
             if (course != null){

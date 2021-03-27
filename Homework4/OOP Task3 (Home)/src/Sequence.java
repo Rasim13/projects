@@ -4,26 +4,35 @@ public class Sequence {
     //Создаем поля класса Sequence
     private SequenceObserver sequenceObserver;
     private SequenceResult sequenceResult;
-    private Sequence generateArray;
+    private int[] generateArray;
 
-    public Sequence(SequenceObserver sequenceObserver) {
-        this.sequenceObserver = sequenceObserver;
+    public Sequence(int[] generateArray){
+        this.generateArray = generateArray;
+        this.sequenceResult = new SequenceResult();
+        this.sequenceObserver = new SequenceObserver();
     }
 
     // 3, 4, 5 -> removeByValue(5) -> 3, 4
     // удалить число из последовательности по значению
+
     public void removeByValue(int value) {
         int [] newArray = new int[generateArray.length - 1];
         int count = 0;
-        for(int j = 0; j < generateArray.length; j++){
-            if(generateArray[j] != value){
-                newArray[count++] = generateArray[j];
+        for(int i = 0; i < generateArray.length; i++){
+            if(generateArray[i] == value){
+                for(int j = 0; j < generateArray.length; j++){
+                    if(generateArray[j] != value){
+                        newArray[count++] = generateArray[j];
+                    }
+                }
+                Arrays.copyOfRange(newArray,0,count);
+                System.out.println("------------------------------");
+                sequenceObserver.printRemoveByValue(value);
+                sequenceResult.showResultRemoveValue(newArray);
+                return;
             }
         }
-        Arrays.copyOfRange(newArray,0,count);
-        System.out.println("------------------------------");
-        sequenceObserver.printRemoveByValue(value);
-        sequenceResult.showResultRemoveValue(newArray);
+        sequenceResult.showNotValueByArray();
     }
 
     // 3, 4, 5 -> removeByIndex(1) -> 3, 5
@@ -86,7 +95,6 @@ public class Sequence {
 
     // вставить элемент в индекс - replace()
     public void replaceNumberToSequence(int index, int number) {
-        int findNumber = -1;
         for(int j = 0; j < generateArray.length; j++){
             if(j == index){
                 generateArray[j] = number;

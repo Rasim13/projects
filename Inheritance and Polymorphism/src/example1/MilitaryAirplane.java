@@ -1,3 +1,5 @@
+package example1;
+
 public class MilitaryAirplane extends MilitaryTransport {
     public MilitaryAirplane(double fuelAmount, double fuelConsumption, int bulletsCount) {
         super(fuelAmount, fuelConsumption, bulletsCount);
