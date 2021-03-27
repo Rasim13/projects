@@ -1,4 +1,4 @@
-package educational.system;
+package src.educarional.system;
 
 import java.util.Random;
 

@@ -1,4 +1,4 @@
-package educational.system;
+package src.educarional.system;
 
 public class Student {
     private String fullName;
