@@ -9,7 +9,8 @@ public class Main {
         Comment[] comments = commentGenerator.getComments(5);
         User[] users = userGenerator.getUsers(5);
         printer.printGenerally(videos, comments, users);
-        statistics.getSortByDisLikeVideo(videos);
+        statistics.getSortByLikeVideo(videos);
         printer.printGenerally(videos, comments, users);
+
     }
 }

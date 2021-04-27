@@ -1,7 +1,5 @@
 package src.educarional.system;
 
-import java.util.Arrays;
-
 public class Tutor {
     private String fullName;
     private int age;

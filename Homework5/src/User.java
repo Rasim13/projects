@@ -4,15 +4,16 @@ public class User {
     private String name;
     private List<Video> listVideo;
     private List<Comment> listUser;
+    private int profit;
 
-    public User(String name,List<Video> listVideo, List<Comment> listUser) {
+    public User(String name, int profit) {
         this.name = name;
-        this.listUser = listUser;
-        this.listVideo = listVideo;
+        this.profit = profit;
     }
 
-    public User(String name) {
-        this.name = name;
+
+    public int getProfit() {
+        return profit;
     }
 
     public String getName() {

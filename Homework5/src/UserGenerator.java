@@ -42,6 +42,6 @@ public class UserGenerator {
     }
 
     public User getUser(int i) {
-        return new User(names.get(random.nextInt(names.size())));
+        return new User(names.get(random.nextInt(names.size())), random.nextInt(100000));
     }
 }

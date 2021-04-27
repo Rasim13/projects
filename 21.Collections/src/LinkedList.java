@@ -77,10 +77,6 @@ public class LinkedList implements List{
         if (index < 0 || index >= count) {
             throw new IndexOutOfBoundsException("Invalid element");
         }
-
-        if (first == null) {
-            return;
-        }
         Node current = first;
         if (index == 0) {
             first = current.next;
@@ -193,24 +189,26 @@ public class LinkedList implements List{
 
     @Override
     public void removeAll(int element) {
-        Node current = first, prev = null;
-        while (current != null && current.value == element) {
-            first = current.next;
-            current = first;
-        }
-        while (current != null) {
-            current = current.next;
-            while(current != null && current.value != element){
-                prev = current;
-                current = current.next;
-            }
-        }
 
-        if (current == null) {
-            return;
-        }
-        prev.next = current.next;
-        current = prev.next;
+
+//        Node current = first, prev = null;
+//        while (current != null && current.value == element) {
+//            first = current.next;
+//            current = first;
+//        }
+//        while (current != null) {
+//            current = current.next;
+//            while(current != null && current.value != element){
+//                prev = current;
+//                current = current.next;
+//            }
+//        }
+//
+//        if (current == null) {
+//            return;
+//        }
+//        prev.next = current.next;
+//        current = prev.next;
     }
 
     @Override
