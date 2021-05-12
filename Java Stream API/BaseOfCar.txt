@@ -1,0 +1,14 @@
+1#Ferrari#red#50000#7000000
+2#Toyota#black#99656#950000
+3#Lexsus#white#78945#2990000
+4#KIA#blue#0#750000
+5#Hyndai#black#1546#788000
+6#Opel#silver#45631#550000
+7#Granta#blue#39000#450000
+8#Porshe#white#78000#3500000
+9#Toyota#red#15484#1500000
+10#Toyota#black#75000#1700000
+11#Toyota#white#50000#1900000
+12#Opel#white#50000#760000
+13#Opel#silver#45000#770000
+14#Opel#silver#45000#770000
