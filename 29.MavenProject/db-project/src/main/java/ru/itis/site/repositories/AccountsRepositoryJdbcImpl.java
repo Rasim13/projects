@@ -1,7 +1,8 @@
-package ru.itis.repositories;
+package ru.itis.site.repositories;
 
-import ru.itis.models.Account;
+import ru.itis.site.models.Account;
 
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,10 +32,10 @@ public class AccountsRepositoryJdbcImpl implements AccountsRepository {
     //language=SQL
     private static final String SQL_ORDER_BY_ID = "select * from account order by id ASC";
 
-    private Connection connection;
+    private DataSource dataSource;
 
-    public AccountsRepositoryJdbcImpl(Connection connection) {
-        this.connection = connection;
+    public AccountsRepositoryJdbcImpl(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
 
     private RowMapper<Account> accountRowMapper = row -> new Account(
@@ -45,10 +46,11 @@ public class AccountsRepositoryJdbcImpl implements AccountsRepository {
 
     @Override
     public List<Account> findAll() {
+        Connection connection = null;
         Statement statement = null;
         ResultSet rows = null;
         try {
-
+            connection = dataSource.getConnection();
             List<Account> accounts = new ArrayList<>();
 
             statement = connection.createStatement();
@@ -78,14 +80,23 @@ public class AccountsRepositoryJdbcImpl implements AccountsRepository {
                     //ignore
                 }
             }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    //ignore
+                }
+            }
         }
     }
 
     @Override
     public Account findById(Long id) {
+        Connection connection = null;
         PreparedStatement statement = null;
         ResultSet rows = null;
         try {
+            connection = dataSource.getConnection();
             statement = connection.prepareStatement(SQL_SELECT_BY_ID);
             statement.setLong(1, id);
             rows = statement.executeQuery();
@@ -112,18 +123,28 @@ public class AccountsRepositoryJdbcImpl implements AccountsRepository {
                     //ignore
                 }
             }
+
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    //ignore
+                }
+            }
         }
     }
 
     @Override
     public void save(Account account) {
+        Connection connection = null;
         PreparedStatement statement = null;
         ResultSet generatedKeys = null;
         try {
+            connection = dataSource.getConnection();
             statement = connection.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, account.getFirstName());
             statement.setString(2, account.getLastName());
-            statement.setBoolean(3, account.getActive());
+            statement.setBoolean(3, account.getIsActive());
 
             int affectedRows = statement.executeUpdate();
 
@@ -157,17 +178,27 @@ public class AccountsRepositoryJdbcImpl implements AccountsRepository {
                     //ignore
                 }
             }
+
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    //ignore
+                }
+            }
         }
     }
 
     @Override
     public void update(Account account) {
+        Connection connection = null;
         PreparedStatement statement = null;
         try {
+            connection = dataSource.getConnection();
             statement = connection.prepareStatement(SQL_UPDATE);
             statement.setString(1, account.getFirstName());
             statement.setString(2, account.getLastName());
-            statement.setBoolean(3, account.getActive());
+            statement.setBoolean(3, account.getIsActive());
             statement.setLong(4, account.getId());
 
             int affectedRows = statement.executeUpdate();
@@ -186,14 +217,24 @@ public class AccountsRepositoryJdbcImpl implements AccountsRepository {
                     //ignore
                 }
             }
+
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    //ignore
+                }
+            }
         }
 
     }
 
     @Override
     public void delete(Account account) {
+        Connection connection = null;
         PreparedStatement statement = null;
         try {
+            connection = dataSource.getConnection();
             statement = connection.prepareStatement(SQL_DELETE_ACCOUNT);
             statement.setString(1, account.getFirstName());
             int result = statement.executeUpdate();
@@ -210,14 +251,24 @@ public class AccountsRepositoryJdbcImpl implements AccountsRepository {
                     // ignore
                 }
             }
+
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    //ignore
+                }
+            }
         }
     }
 
 
     @Override
     public void deleteById(Long id) {
+        Connection connection = null;
         PreparedStatement statement = null;
         try {
+            connection = dataSource.getConnection();
             statement = connection.prepareStatement(SQL_DELETE_BY_ID);
             statement.setLong(1, id);
             int result = statement.executeUpdate();
@@ -234,14 +285,24 @@ public class AccountsRepositoryJdbcImpl implements AccountsRepository {
                     //ignore
                 }
             }
+
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    //ignore
+                }
+            }
         }
     }
 
     @Override
     public void sortById() {
+        Connection connection = null;
         Statement statement = null;
         ResultSet rs = null;
         try {
+            connection = dataSource.getConnection();
             statement = connection.createStatement();
             rs = statement.executeQuery(SQL_ORDER_BY_ID);
             while (rs.next()) {
@@ -255,6 +316,14 @@ public class AccountsRepositoryJdbcImpl implements AccountsRepository {
             if (statement != null) {
                 try {
                     statement.close();
+                } catch (SQLException e) {
+                    //ignore
+                }
+            }
+
+            if (connection != null) {
+                try {
+                    connection.close();
                 } catch (SQLException e) {
                     //ignore
                 }
