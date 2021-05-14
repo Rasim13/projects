@@ -22,15 +22,13 @@ public class Main {
 
         AccountsRepositories accountsRepositories = new AccountsRepositoriesJdbcTemplateImpl(dataSource);
 
-        Account account = Account.builder()
-                .firstName("TEMP")
-                .lastName("TEMP2")
-                .isActive(true)
-                .build();
-        accountsRepositories.save(account);
-        System.out.println(account);
-
-
+//        Account account = Account.builder()
+//                .firstName("TEMP")
+//                .lastName("TEMP2")
+//                .isActive(true)
+//                .build();
+//        accountsRepositories.save(account);
+//        System.out.println(account);
 
 //        accountsRepositories.save(Account.builder()
 //                .firstName("TEMP")
@@ -53,6 +51,9 @@ public class Main {
 //        } else {
 //            System.out.println("Объект не найден");
 //        }
+
+//        accountsRepositories.deleteById(14L);
+        accountsRepositories.delete(new Account("ГЛАВНЫЙ"));
 
     }
 }

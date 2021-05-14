@@ -32,6 +32,12 @@ public class AccountsRepositoriesJdbcTemplateImpl implements AccountsRepositorie
     private static final String SQL_UPDATE = "update account set first_name = ?," +
             "last_name = ?, is_active = ? where id = ?";
 
+    //language=SQL
+    private static final String SQL_DELETE_BY_ID = "delete from account where id = ?";
+
+    //language=SQL
+    private static final String SQL_DELETE_ACCOUNT = "delete from account where first_name = ?";
+
     private final JdbcTemplate jdbcTemplate;
 
     public AccountsRepositoriesJdbcTemplateImpl(DataSource dataSource) {
@@ -86,11 +92,21 @@ public class AccountsRepositoriesJdbcTemplateImpl implements AccountsRepositorie
 
     @Override
     public void delete(Account account) {
-
+        int status = jdbcTemplate.update(SQL_DELETE_ACCOUNT,account.getFirstName());
+        if (status != 0) {
+            System.out.println("Record have deleted");
+        } else {
+            System.out.println("Record doesn't exist");
+        }
     }
 
     @Override
-    public void deleteById(Long aLong) {
-
+    public void deleteById(Long id) {
+        int status = jdbcTemplate.update(SQL_DELETE_BY_ID, id);
+        if (status != 0) {
+            System.out.println("Record have deleted for ID " + id);
+        } else {
+            System.out.println("Record doesn't exist with ID " + id);
+        }
     }
 }

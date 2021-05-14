@@ -12,4 +12,13 @@ public class Account {
     private String lastName;
     private Boolean isActive;
 
+    public Account(String firstName, String lastName, Boolean isActive) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.isActive = isActive;
+    }
+
+    public Account(String firstName) {
+        this.firstName = firstName;
+    }
 }
