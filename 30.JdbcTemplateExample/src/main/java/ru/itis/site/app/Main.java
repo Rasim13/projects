@@ -2,6 +2,8 @@ package ru.itis.site.app;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.itis.site.models.Account;
 import ru.itis.site.repositories.AccountsRepositories;
 import ru.itis.site.repositories.AccountsRepositoriesJdbcTemplateImpl;
@@ -11,24 +13,16 @@ import java.util.Optional;
 
 public class Main {
     public static void main(String[] args) {
-        HikariConfig config = new HikariConfig();
-        config.setJdbcUrl("jdbc:postgresql://localhost:5432/javaitis13");
-        config.setDriverClassName("org.postgresql.Driver");
-        config.setUsername("postgres");
-        config.setPassword("sql2021");
-        config.setMaximumPoolSize(50);
+        ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
+        AccountsRepositories accountsRepositories = context.getBean(AccountsRepositories.class);
 
-        DataSource dataSource = new HikariDataSource(config);
-
-        AccountsRepositories accountsRepositories = new AccountsRepositoriesJdbcTemplateImpl(dataSource);
-
-//        Account account = Account.builder()
-//                .firstName("TEMP")
-//                .lastName("TEMP2")
-//                .isActive(true)
-//                .build();
-//        accountsRepositories.save(account);
-//        System.out.println(account);
+        Account account = Account.builder()
+                .firstName("TEMP")
+                .lastName("TEMP2")
+                .isActive(true)
+                .build();
+        accountsRepositories.save(account);
+        System.out.println(account);
 
 //        accountsRepositories.save(Account.builder()
 //                .firstName("TEMP")

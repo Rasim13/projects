@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="accountRepository" class="ru.itis.site.repositories.AccountsRepositoriesJdbcTemplateImpl">
+        <constructor-arg name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
+        <constructor-arg name="configuration" ref="hikariConfig"/>
+    </bean>
+
+    <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+        <property name="jdbcUrl" value="jdbc:postgresql://localhost:5432/javaitis13"/>
+        <property name="username" value="postgres"/>
+        <property name="driverClassName" value="org.postgresql.Driver"/>
+        <property name="password" value="sql2021"/>
+        <property name="maximumPoolSize" value="50"/>
+    </bean>
+
+</beans>
