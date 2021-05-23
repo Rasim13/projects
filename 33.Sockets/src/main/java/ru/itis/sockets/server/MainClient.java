@@ -13,9 +13,19 @@ public class MainClient {
             PrintWriter toServer = new PrintWriter(new OutputStreamWriter(client.getOutputStream()), true);
             BufferedReader fromServer = new BufferedReader(new InputStreamReader(client.getInputStream()));
 
+            new Thread(() -> {
+                while(true) {
+                    String messageFromServer = null;
+                    try {
+                        messageFromServer = fromServer.readLine();
+                        System.out.println(messageFromServer);
+                    } catch (IOException e) {
+                        throw new IllegalStateException(e);
+                    }
+                }
+            }).start();
+
             while(true) {
-                String messageFromServer = fromServer.readLine();
-                System.out.println("От сервера: " + messageFromServer);
                 String messageToServer = scanner.nextLine();
                 toServer.println(messageToServer);
             }
