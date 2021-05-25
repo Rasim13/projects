@@ -1,7 +1,10 @@
 package ru.itis.game.services;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Random;
 
+@Component
 public class GameLogicServiceRandomImpl implements GameLogicService {
 
     private Random random;

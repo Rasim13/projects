@@ -1,5 +1,7 @@
 package ru.itis.game.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import ru.itis.game.models.Game;
 import ru.itis.game.models.Player;
 import ru.itis.game.models.Shot;
@@ -12,22 +14,17 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Random;
 
+@Component
 public class GameServiceImpl implements GameService {
+
+    @Autowired
     private PlayersRepository playersRepository;
+    @Autowired
     private GamesRepository gamesRepository;
+    @Autowired
     private ShotsRepository shotsRepository;
+    @Autowired
     private GameLogicService gameLogicService;
-
-    public GameServiceImpl(PlayersRepository playersRepository,
-                           GamesRepository gamesRepository,
-                           ShotsRepository shotsRepository,
-                           GameLogicService gameLogicService) {
-        this.playersRepository = playersRepository;
-        this.gamesRepository = gamesRepository;
-        this.shotsRepository = shotsRepository;
-        this.gameLogicService = gameLogicService;
-
-    }
 
     @Override
     public Long startGame(String firstPlayer, String secondPlayer) {

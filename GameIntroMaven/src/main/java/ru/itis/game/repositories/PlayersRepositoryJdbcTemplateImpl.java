@@ -1,16 +1,21 @@
 package ru.itis.game.repositories;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
 import ru.itis.game.models.Player;
 
 import javax.sql.DataSource;
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class PlayersRepositoryJdbcTemplateImpl implements PlayersRepository {
 
     private JdbcTemplate jdbcTemplate;
 
+    @Autowired
     public PlayersRepositoryJdbcTemplateImpl (DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
