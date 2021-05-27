@@ -10,14 +10,14 @@ import javax.sql.DataSource;
 import java.util.List;
 import java.util.Optional;
 
-@Component
+@Component(value = "shotsRepository")
 public class ShotsRepositoryJdbcTemplateImpl implements ShotsRepository {
 
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public ShotsRepositoryJdbcTemplateImpl (DataSource dataSource) {
-        this.jdbcTemplate = new JdbcTemplate(dataSource);
+    public ShotsRepositoryJdbcTemplateImpl (JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     @Override

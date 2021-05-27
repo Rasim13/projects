@@ -1,0 +1,7 @@
+{
+  "dispatchDateTime": ["2021,5,23,16,20,15,49800000"],
+  "message": "Hello, how are you?",
+  "from": "Rasim",
+  "participants": ["Airat","Rasim","Damir"]
+
+}

@@ -1,20 +1,19 @@
 package ru.itis.game.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import ru.itis.game.models.Game;
-import ru.itis.game.models.Player;
-import ru.itis.game.models.Shot;
-import ru.itis.game.repositories.GamesRepository;
-import ru.itis.game.repositories.PlayersRepository;
-import ru.itis.game.repositories.ShotsRepository;
+import ru.itis.game.dto.MessageDto;
+import ru.itis.game.dto.UsernamePasswordDto;
+import ru.itis.game.models.*;
+import ru.itis.game.repositories.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Random;
 
-@Component
+@Component(value = "gameService")
 public class GameServiceImpl implements GameService {
 
     @Autowired
@@ -25,6 +24,43 @@ public class GameServiceImpl implements GameService {
     private ShotsRepository shotsRepository;
     @Autowired
     private GameLogicService gameLogicService;
+    @Autowired
+    private MessagesRepository messagesRepository;
+    @Autowired
+    private ClientsRepository clientsRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Override
+    public void connect(String ip) {
+        Client client = Client.builder()
+                .dateTime(LocalDateTime.now())
+                .ip(ip)
+                .build();
+        clientsRepository.save(client);
+
+    }
+
+    @Override
+    public void saveMessage(MessageDto message) {
+        Message model = Message.builder()
+                .dateTime(message.getDispatchDateTime())
+                .tags(message.getTags())
+                .text(message.getText())
+                .build();
+        messagesRepository.save(model);
+    }
+
+    @Override
+    public boolean authenticate(UsernamePasswordDto usernamePassword) {
+        Optional<Player> playerOptional = playersRepository.findOneByNickname(usernamePassword.getNickname());
+        if (playerOptional.isPresent()) {
+            Player player = playerOptional.get();
+            return passwordEncoder.matches(usernamePassword.getPassword(), player.getPassword());
+        } else {
+            return false;
+        }
+    }
 
     @Override
     public Long startGame(String firstPlayer, String secondPlayer) {
@@ -84,6 +120,16 @@ public class GameServiceImpl implements GameService {
         } else {
             throw new IllegalArgumentException("Game not found");
         }
+    }
+
+    @Override
+    public void signUp(UsernamePasswordDto usernamePasswordDto) {
+        Player player = Player.builder()
+                .nickname(usernamePasswordDto.getNickname())
+                .password(passwordEncoder.encode(usernamePasswordDto.getPassword()))
+                .build();
+        playersRepository.save(player);
+
     }
 
     private Player getPlayer(String nickname) {

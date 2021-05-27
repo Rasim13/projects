@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Random;
 
-@Component
+@Component(value = "simpleLogic")
 public class GameLogicServiceRandomImpl implements GameLogicService {
 
     private Random random;

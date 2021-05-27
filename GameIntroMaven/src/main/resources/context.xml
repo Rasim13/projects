@@ -7,18 +7,4 @@
            http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-    <context:component-scan base-package="ru.itis.game"/>
-
-    <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
-        <constructor-arg name="configuration" ref="hikariConfig"/>
-    </bean>
-
-    <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
-        <property name="jdbcUrl" value="jdbc:postgresql://localhost:5432/javaitis13"/>
-        <property name="username" value="postgres"/>
-        <property name="driverClassName" value="org.postgresql.Driver"/>
-        <property name="password" value="sql2021"/>
-        <property name="maximumPoolSize" value="50"/>
-    </bean>
-
 </beans>
