@@ -3,18 +3,14 @@ package ru.itis.app;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import ru.itis.models.Account;
-import ru.itis.repositories.AccountsRepositories;
-import ru.itis.repositories.AccountsRepositoriesFileBasedImpl;
-
-import java.time.LocalDateTime;
+import ru.itis.download.SaveDataToFile;
 
 public class Main {
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
-        AccountsRepositories accountsRepositories = context.getBean(AccountsRepositories.class);
-        AccountsRepositoriesFileBasedImpl accountsRepositories1 = new AccountsRepositoriesFileBasedImpl("D:\\Данные.xlsx", new HSSFWorkbook());
-        accountsRepositories1.saveToFile();
+        SaveDataToFile saveDataToFile = context.getBean(SaveDataToFile.class);
+        HSSFWorkbook hssfWorkbook = new HSSFWorkbook();
+
 
 //        Account account = Account.builder()
 //                .firstName("Виктория")
@@ -26,7 +22,9 @@ public class Main {
 //                .dateOfSend(LocalDateTime.now())
 //                .build();
 //        accountsRepositories.save(account);
-        accountsRepositories.delete(new Account("Виктория", "Казакова", 75));
+
+        saveDataToFile.saveDataToExcel();
+
 
     }
 }

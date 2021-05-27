@@ -1,4 +1,4 @@
-package ru.itis.repositories;
+package ru.itis.download;
 
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -13,23 +13,18 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-public class AccountsRepositoriesFileBasedImpl implements AccountsRepositories {
-
-    private String fileName;
-    private HSSFWorkbook hssfWorkbook;
+public class SaveDataToFileExcelImpl implements SaveDataToFile {
     private JdbcTemplate jdbcTemplate;
 
-    //language=SQL
-    private static final String SQL_SELECT_ALL = "select * from account order by id;";
-
-    public AccountsRepositoriesFileBasedImpl(String fileName, HSSFWorkbook hssfWorkbook, DataSource dataSource) {
-        this.fileName = fileName;
-        this.hssfWorkbook = hssfWorkbook;
+    public SaveDataToFileExcelImpl(DataSource dataSource) {
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
+
+    //language=SQL
+    private static final String SQL_SELECT_ALL = "select * from account order by id";
+
 
     private RowMapper<Account> accountRowMapper = (row, rowNumber) -> {
         return Account.builder()
@@ -40,18 +35,22 @@ public class AccountsRepositoriesFileBasedImpl implements AccountsRepositories {
                 .accountingOfHotWater(row.getInt("accounting_of_hot_water"))
                 .accountingOfColdWater(row.getInt("accounting_of_hot_water"))
                 .accountingOfPower(row.getInt("accounting_of_power"))
-                .dateOfSend(LocalDateTime.parse(row.getTime("date_of_send").toString()))
                 .build();
     };
 
-    public void saveToFile() {
+    @Override
+    public void saveDataToExcel() {
+        // создаем самого excel файла
         HSSFWorkbook workbook = new HSSFWorkbook();
         // создаем лист
         HSSFSheet sheet = workbook.createSheet("Данные о пользователях");
+        // заполняем список данными из базы данных
         List<Account> accountList = findAll();
 
+        // создаем счетчик строки
         int rowNum = 0;
 
+        // создаем подписи к столбцам
         Row row = sheet.createRow(rowNum);
         row.createCell(0).setCellValue("Id");
         row.createCell(1).setCellValue("Дата отправки");
@@ -62,14 +61,15 @@ public class AccountsRepositoriesFileBasedImpl implements AccountsRepositories {
         row.createCell(6).setCellValue("Показания холодной воды");
         row.createCell(7).setCellValue("Показания электроэнергии");
 
+        // заполняем лист данными
         for (Account accountData:accountList) {
             createSheetHeader(sheet, ++ rowNum, accountData);
         }
 
-        // записываем созданный в памяти Excel документ в файл
         FileOutputStream out = null;
         try {
-            out = new FileOutputStream(new File(fileName));
+            //записываем данные в файл
+            out = new FileOutputStream(new File("Данные.xls"));
             try {
                 workbook.write(out);
             } catch (IOException e) {
@@ -78,7 +78,6 @@ public class AccountsRepositoriesFileBasedImpl implements AccountsRepositories {
         } catch (FileNotFoundException e) {
             throw new IllegalStateException(e);
         }
-
     }
 
     public void createSheetHeader(HSSFSheet sheet, int rowNum, Account accountData) {
@@ -88,46 +87,13 @@ public class AccountsRepositoriesFileBasedImpl implements AccountsRepositories {
         row.createCell(1).setCellValue(accountData.getDateOfSend());
         row.createCell(2).setCellValue(accountData.getFirstName());
         row.createCell(3).setCellValue(accountData.getLastName());
-        row.createCell(3).setCellValue(accountData.getNumberOfFlat());
-        row.createCell(3).setCellValue(accountData.getAccountingOfHotWater());
-        row.createCell(3).setCellValue(accountData.getAccountingOfColdWater());
-        row.createCell(3).setCellValue(accountData.getAccountingOfPower());
-
+        row.createCell(4).setCellValue(accountData.getNumberOfFlat());
+        row.createCell(5).setCellValue(accountData.getAccountingOfHotWater());
+        row.createCell(6).setCellValue(accountData.getAccountingOfColdWater());
+        row.createCell(7).setCellValue(accountData.getAccountingOfPower());
     }
 
-
-    @Override
     public List<Account> findAll() {
         return jdbcTemplate.query(SQL_SELECT_ALL, accountRowMapper);
-    }
-
-    @Override
-    public Optional<Account> findById(Integer integer) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<Account> findByFlat(Integer numberOfFlat) {
-        return Optional.empty();
-    }
-
-    @Override
-    public void save(Account account) {
-
-    }
-
-    @Override
-    public void update(Account account) {
-
-    }
-
-    @Override
-    public void delete(Account account) {
-
-    }
-
-    @Override
-    public void deleteById(Integer integer) {
-
     }
 }
