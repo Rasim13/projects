@@ -11,4 +11,5 @@ public interface CrudRepositories<T, ID> {
     void update(T account);
     void delete(T account);
     void deleteById(ID id);
+    void saveToFile();
 }

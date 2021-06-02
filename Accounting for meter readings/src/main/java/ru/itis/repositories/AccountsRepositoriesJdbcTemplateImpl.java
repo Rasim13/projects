@@ -1,11 +1,13 @@
 package ru.itis.repositories;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Component;
 import ru.itis.models.Account;
 
 import javax.sql.DataSource;
@@ -57,7 +59,7 @@ public class AccountsRepositoriesJdbcTemplateImpl implements AccountsRepositorie
                 .accountingOfHotWater(row.getInt("accounting_of_hot_water"))
                 .accountingOfColdWater(row.getInt("accounting_of_hot_water"))
                 .accountingOfPower(row.getInt("accounting_of_power"))
-                .dateOfSend(LocalDateTime.parse(row.getTime("date_of_send").toString()))
+                .dateOfSend(LocalDateTime.parse(row.getTime("date_sof_send").toString()))
                 .build();
     };
 
@@ -129,5 +131,9 @@ public class AccountsRepositoriesJdbcTemplateImpl implements AccountsRepositorie
         } else {
             System.out.println("Record doesn't exist with ID " + id);
         }
+    }
+
+    @Override
+    public void saveToFile() {
     }
 }

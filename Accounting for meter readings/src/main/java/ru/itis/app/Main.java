@@ -1,16 +1,14 @@
 package ru.itis.app;
-
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import ru.itis.download.SaveDataToFile;
+import ru.itis.repositories.AccountsRepositories;
+import ru.itis.repositories.AccountsRepositoriesToFileImpl;
+
 
 public class Main {
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
-        SaveDataToFile saveDataToFile = context.getBean(SaveDataToFile.class);
-        HSSFWorkbook hssfWorkbook = new HSSFWorkbook();
-
+        AccountsRepositories saveDataToFile = context.getBean(AccountsRepositoriesToFileImpl.class);
 
 //        Account account = Account.builder()
 //                .firstName("Виктория")
@@ -23,8 +21,6 @@ public class Main {
 //                .build();
 //        accountsRepositories.save(account);
 
-        saveDataToFile.saveDataToExcel();
-
-
+        saveDataToFile.saveToFile();
     }
 }

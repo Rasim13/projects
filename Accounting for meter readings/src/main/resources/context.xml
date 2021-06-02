@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="saveData" class="ru.itis.download.SaveDataToFileExcelImpl">
+
+
+    <bean id="accountsRepositories" class="ru.itis.repositories.AccountsRepositoriesToFileImpl">
+        <constructor-arg name="dataSource" ref="dataSource"/>
+        <property name="fileName" value="Данные.xls"/>
+    </bean>
+
+    <bean id="accountsRepositoriesJdbc" class="ru.itis.repositories.AccountsRepositoriesJdbcTemplateImpl">
         <constructor-arg name="dataSource" ref="dataSource"/>
     </bean>
+
 
     <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
         <constructor-arg name="configuration" ref="hikariConfig"/>
@@ -18,6 +26,5 @@
         <property name="password" value="sql2021"/>
         <property name="maximumPoolSize" value="50"/>
     </bean>
-
 
 </beans>
