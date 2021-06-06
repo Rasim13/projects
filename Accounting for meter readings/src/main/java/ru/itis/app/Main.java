@@ -1,26 +1,32 @@
 package ru.itis.app;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import ru.itis.models.Account;
 import ru.itis.repositories.AccountsRepositories;
+import ru.itis.repositories.AccountsRepositoriesJdbcTemplateImpl;
 import ru.itis.repositories.AccountsRepositoriesToFileImpl;
+import ru.itis.services.Calculation;
+import ru.itis.services.CalculationImpl;
+
+import java.time.LocalDate;
 
 
 public class Main {
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
-        AccountsRepositories saveDataToFile = context.getBean(AccountsRepositoriesToFileImpl.class);
+        Calculation accountsRepositories = context.getBean(CalculationImpl.class);
 
 //        Account account = Account.builder()
-//                .firstName("Виктория")
-//                .lastName("Казакова")
-//                .numberOfFlat(75)
-//                .accountingOfColdWater(5624)
-//                .accountingOfHotWater(4857)
-//                .accountingOfPower(4878)
-//                .dateOfSend(LocalDateTime.now())
+//                .firstName("Расим")
+//                .lastName("Замалтдинов")
+//                .numberOfFlat(13)
+//                .accountingOfColdWater(132)
+//                .accountingOfHotWater(128)
+//                .accountingOfPower(500)
+//                .dateOfSend(LocalDate.now())
 //                .build();
 //        accountsRepositories.save(account);
-
-        saveDataToFile.saveToFile();
+//        accountRepositories.saveToFile();
+        accountsRepositories.calculationConsumption(13);
     }
 }

@@ -10,6 +10,10 @@
         <property name="fileName" value="Данные.xls"/>
     </bean>
 
+    <bean id="calculation" class="ru.itis.services.CalculationImpl">
+        <constructor-arg name="dataSource" ref="dataSource"/>
+    </bean>
+
     <bean id="accountsRepositoriesJdbc" class="ru.itis.repositories.AccountsRepositoriesJdbcTemplateImpl">
         <constructor-arg name="dataSource" ref="dataSource"/>
     </bean>

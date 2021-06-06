@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -18,7 +20,7 @@ public class Account {
     private Integer accountingOfHotWater;
     private Integer accountingOfColdWater;
     private Integer accountingOfPower;
-    private LocalDateTime dateOfSend;
+    private LocalDate dateOfSend;
 
     public Account(String firstName, String lastName, Integer numberOfFlat){
         this.firstName = firstName;

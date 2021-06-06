@@ -2,6 +2,7 @@ package ru.itis.repositories;
 
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.formula.eval.NotImplementedException;
 import org.apache.poi.ss.usermodel.Row;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -14,6 +15,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -22,7 +24,6 @@ public class AccountsRepositoriesToFileImpl implements AccountsRepositories {
 
     private JdbcTemplate jdbcTemplate;
     private String fileName;
-
 
     public AccountsRepositoriesToFileImpl(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
@@ -44,7 +45,7 @@ public class AccountsRepositoriesToFileImpl implements AccountsRepositories {
                 .accountingOfHotWater(row.getInt("accounting_of_hot_water"))
                 .accountingOfColdWater(row.getInt("accounting_of_hot_water"))
                 .accountingOfPower(row.getInt("accounting_of_power"))
-                .dateOfSend(LocalDateTime.parse(row.getString("date_of_send")))
+                .dateOfSend(LocalDate.parse(row.getString("date_of_send")))
                 .build();
     };
 
@@ -65,22 +66,22 @@ public class AccountsRepositoriesToFileImpl implements AccountsRepositories {
 
     @Override
     public void save(Account account) {
-
+        throw new NotImplementedException("Нет реализации");
     }
 
     @Override
     public void update(Account account) {
-
+        throw new NotImplementedException("Нет реализации");
     }
 
     @Override
     public void delete(Account account) {
-
+        throw new NotImplementedException("Нет реализации");
     }
 
     @Override
     public void deleteById(Integer integer) {
-
+        throw new NotImplementedException("Нет реализации");
     }
 
     @Override
@@ -131,7 +132,7 @@ public class AccountsRepositoriesToFileImpl implements AccountsRepositories {
     public void createSheetHeader(HSSFSheet sheet, int rowNum, Account accountData) {
         Row row = sheet.createRow(rowNum);
         row.createCell(0).setCellValue(accountData.getId());
-        row.createCell(1).setCellValue(accountData.getDateOfSend().toLocalDate().toString());
+        row.createCell(1).setCellValue(accountData.getDateOfSend().toString());
         row.createCell(2).setCellValue(accountData.getFirstName());
         row.createCell(3).setCellValue(accountData.getLastName());
         row.createCell(4).setCellValue(accountData.getNumberOfFlat());
@@ -139,6 +140,4 @@ public class AccountsRepositoriesToFileImpl implements AccountsRepositories {
         row.createCell(6).setCellValue(accountData.getAccountingOfColdWater());
         row.createCell(7).setCellValue(accountData.getAccountingOfPower());
     }
-
-
 }

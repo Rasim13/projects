@@ -1,5 +1,6 @@
 package ru.itis.repositories;
 
+import org.apache.poi.ss.formula.eval.NotImplementedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -7,13 +8,14 @@ import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
-import org.springframework.stereotype.Component;
 import ru.itis.models.Account;
+import ru.itis.services.CalculationImpl;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -59,7 +61,7 @@ public class AccountsRepositoriesJdbcTemplateImpl implements AccountsRepositorie
                 .accountingOfHotWater(row.getInt("accounting_of_hot_water"))
                 .accountingOfColdWater(row.getInt("accounting_of_hot_water"))
                 .accountingOfPower(row.getInt("accounting_of_power"))
-                .dateOfSend(LocalDateTime.parse(row.getTime("date_sof_send").toString()))
+                .dateOfSend(LocalDate.parse(row.getTime("date_sof_send").toString()))
                 .build();
     };
 
@@ -71,7 +73,7 @@ public class AccountsRepositoriesJdbcTemplateImpl implements AccountsRepositorie
     @Override
     public Optional<Account> findById(Integer id) {
         try {
-            return Optional.of(jdbcTemplate.queryForObject(SQL_SELECT_BY_FLAT, accountRowMapper, id));
+            return Optional.of(jdbcTemplate.queryForObject(SQL_SELECT_BY_ID, accountRowMapper, id));
         } catch (EmptyResultDataAccessException e) {
             return Optional.empty();
         }
@@ -80,7 +82,7 @@ public class AccountsRepositoriesJdbcTemplateImpl implements AccountsRepositorie
     @Override
     public Optional<Account> findByFlat(Integer numberOfFlat) {
         try {
-            return Optional.of(jdbcTemplate.queryForObject(SQL_SELECT_BY_ID, accountRowMapper, numberOfFlat));
+            return Optional.of(jdbcTemplate.queryForObject(SQL_SELECT_BY_FLAT, accountRowMapper, numberOfFlat));
         } catch (EmptyResultDataAccessException e) {
             return Optional.empty();
         }
@@ -135,5 +137,6 @@ public class AccountsRepositoriesJdbcTemplateImpl implements AccountsRepositorie
 
     @Override
     public void saveToFile() {
+        throw new NotImplementedException("Нет реализации");
     }
 }
