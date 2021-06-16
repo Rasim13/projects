@@ -2,6 +2,7 @@ package ru.itis.site.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.itis.site.dto.AccountDto;
 import ru.itis.site.dto.SearchAccountDto;
 import ru.itis.site.repositories.AccountRepository;
 
@@ -18,6 +19,11 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     public AccountServiceImpl(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
+    }
+
+    @Override
+    public List<AccountDto> getAll() {
+        return AccountDto.from(accountRepository.findAll());
     }
 
     @Override

@@ -18,6 +18,9 @@ public class AccountRepositoryJdbcTemplateImpl implements AccountRepository {
     //language=SQL
     private static final String SQL_SEARCH = "select * from account where first_name ilike(:query) or last_name ilike (:query)";
 
+    //language=SQL
+    private static final String SQL_SELECT_ALL = "select * from account";
+
     public AccountRepositoryJdbcTemplateImpl(NamedParameterJdbcTemplate namedJdbcTemplate) {
         this.namedJdbcTemplate = namedJdbcTemplate;
     }
@@ -37,5 +40,10 @@ public class AccountRepositoryJdbcTemplateImpl implements AccountRepository {
     public List<Account> findByFirstNameOrLastNameContains(String name) {
         Map<String, Object> params = Collections.singletonMap("query","%" + name +  "%");
         return namedJdbcTemplate.query(SQL_SEARCH, params, accountRowMapper);
+    }
+
+    @Override
+    public List<Account> findAll() {
+        return namedJdbcTemplate.query(SQL_SELECT_ALL, accountRowMapper);
     }
 }
