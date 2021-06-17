@@ -1,0 +1,16 @@
+Hello, Расим, your id is 1,
+
+    Age is undefined
+
+Other users:
+
+    Name: Айрат
+    Age: 25
+    Name: Даниил
+    Age: 30
+    Name: Виктор
+    Age: 19
+    Name: Антон
+    Age: 26
+    Name: Фарит
+    Age: 24
