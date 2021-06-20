@@ -1,0 +1,13 @@
+GET localhost:80/api/users
+
+###
+
+POST localhost:80/api/users
+Content-Type: application/json
+
+{
+  "firstName" : "Чингиз",
+  "lastName" : "Хан",
+  "email" : "chingiz@mail.com",
+  "password" : "qwerty007"
+}
