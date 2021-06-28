@@ -1,0 +1,21 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.driver_class">org.postgresql.Driver</property>
+        <property name="connection.username">postgres</property>
+        <property name="connection.password">sql2021</property>
+        <property name="connection.url">jdbc:postgresql://localhost:5432/hibernate_db</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL9Dialect</property>
+        <property name="hibernate.connection.provider_class">com.zaxxer.hikari.hibernate.HikariConnectionProvider</property>
+        <property name="hibernate.hikari.maximumPoolSize">20</property>
+        <property name="show_sql">true</property>
+<!--        hibernate на основе hbm файлов генерит таблицы. Можно вместо create постваить validate,
+он будет проверять насколько ваша сущность соответствует таблице. Update позволяет обновлять, если в модели  что то
+поменяется-->
+        <property name="hibernate.hbm2ddl.auto">create</property>
+        <mapping resource="hibernate/Lesson.hbm.xml"/>
+        <mapping resource="hibernate/Course.hbm.xml"/>
+    </session-factory>
+</hibernate-configuration>
