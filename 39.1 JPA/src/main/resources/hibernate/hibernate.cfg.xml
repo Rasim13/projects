@@ -11,8 +11,12 @@
         <property name="hibernate.connection.provider_class">com.zaxxer.hikari.hibernate.HikariConnectionProvider</property>
         <property name="hibernate.hikari.maximumPoolSize">20</property>
         <property name="show_sql">true</property>
+<!--        hibernate на основе hbm файлов генерит таблицы. Можно вместо create постваить validate,
+он будет проверять насколько ваша сущность соответствует таблице. Update позволяет обновлять, если в модели  что то
+поменяется-->
         <property name="hibernate.hbm2ddl.auto">create</property>
-        <mapping resource="ru/itis/hibernate/Lesson.hbm.xml"/>
-        <mapping resource="ru/itis/hibernate/Course.hbm.xml"/>
+        <mapping class="ru.itis.models.Course"/>
+        <mapping class="ru.itis.models.Lesson"/>
+        <mapping class="ru.itis.models.Student"/>
     </session-factory>
 </hibernate-configuration>
