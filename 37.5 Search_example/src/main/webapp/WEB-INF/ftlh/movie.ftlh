@@ -15,18 +15,18 @@
             $('#movieTitle').on('keyup', function() {
                 let name = $('#movieTitle').val();
                 let body = {
-                    "movieTitle" : movieTitle
+                    "movieTitle" : "movieTitle"
                 };
                 if ((name != '') && (name.lenght > 1)) {
                     $.ajax({
-                        type: "GET",
+                        type: "POST",
                         url: "http://localhost/movie",
                         data: JSON.stringify(body),
+                        dataType: "json",
+                        contentType: "application/json",
                         success: function (response) {
                             $("#display").html(response).show();
                         },
-                        dataType: "json",
-                        contentType: "application/json"
                     });
                 }
             });

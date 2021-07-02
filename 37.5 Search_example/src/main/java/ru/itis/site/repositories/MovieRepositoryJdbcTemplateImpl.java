@@ -1,5 +1,6 @@
 package ru.itis.site.repositories;
 
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -12,16 +13,16 @@ import java.util.Map;
 @Repository
 public class MovieRepositoryJdbcTemplateImpl implements MovieRepository {
 
-    private final NamedParameterJdbcTemplate namedJdbcTemplate;
+    private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     //language=SQL
-    private static final String SQL_SEARCH = "select * from movie where movie_title ilike(:query)";
+    private static final String SQL_SEARCH = "select * from movie where movie_title ilike = ?";
 
     //language=SQL
     private static final String SQL_SELECT_ALL = "select * from movie";
 
-    public MovieRepositoryJdbcTemplateImpl(NamedParameterJdbcTemplate namedJdbcTemplate) {
-        this.namedJdbcTemplate = namedJdbcTemplate;
+    public MovieRepositoryJdbcTemplateImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
     // строка из БД мапиться (сопоставляется) в модель Movie
@@ -33,12 +34,12 @@ public class MovieRepositoryJdbcTemplateImpl implements MovieRepository {
 
     @Override
     public List findAll() {
-        return namedJdbcTemplate.query(SQL_SELECT_ALL, movieRowMapper);
+        return namedParameterJdbcTemplate.query(SQL_SELECT_ALL, movieRowMapper);
     }
 
     @Override
     public List<Movie> findByMovieContains(String title) {
         Map<String, Object> params = Collections.singletonMap("query","%" + title + "%");
-        return namedJdbcTemplate.query(SQL_SEARCH, params, movieRowMapper);
+        return namedParameterJdbcTemplate.query(SQL_SEARCH, params, movieRowMapper);
     }
 }
