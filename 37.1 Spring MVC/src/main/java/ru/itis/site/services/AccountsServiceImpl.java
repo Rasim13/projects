@@ -12,14 +12,14 @@ import java.util.List;
 import static ru.itis.site.dto.SearchAccountDto.from;
 
 @Service
-public class AccountServiceImpl implements AccountService {
+public class AccountsServiceImpl implements AccountsService {
 
 
     private final AccountsRepository accountsRepository;
     private final SignUpService signUpService;
 
     @Autowired
-    public AccountServiceImpl(AccountsRepository accountsRepository, SignUpService signUpService) {
+    public AccountsServiceImpl(AccountsRepository accountsRepository, SignUpService signUpService) {
         this.accountsRepository = accountsRepository;
         this.signUpService = signUpService;
     }
@@ -31,7 +31,8 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public List<SearchAccountDto> search(String query) {
-        return from(accountsRepository.findByFirstNameOrLastNameContains(query));
+//        return from(accountsRepository.findByFirstNameOrLastNameContains(query));
+        return null;
     }
 
     @Override

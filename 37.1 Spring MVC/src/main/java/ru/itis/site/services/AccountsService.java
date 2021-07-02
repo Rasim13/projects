@@ -7,7 +7,7 @@ import ru.itis.site.forms.SignUpForm;
 import java.util.List;
 
 
-public interface AccountService {
+public interface AccountsService {
     List<AccountDto> getAll();
     List<SearchAccountDto> search(String query);
 

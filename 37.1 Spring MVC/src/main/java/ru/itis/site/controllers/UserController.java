@@ -5,10 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 import ru.itis.site.dto.AccountDto;
 import ru.itis.site.forms.SignUpForm;
-import ru.itis.site.services.AccountService;
+import ru.itis.site.services.AccountsService;
 
 import java.util.List;
 
@@ -16,7 +15,7 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    private AccountService accountService;
+    private AccountsService accountService;
 
 //    @RequestMapping(value = "/users", method = RequestMethod.GET)
 //    public ModelAndView getUsersPage() {

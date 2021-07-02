@@ -1,9 +1,9 @@
 package ru.itis.site.repositories;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.security.core.userdetails.User;
 import ru.itis.site.models.Account;
 
-import java.util.List;
+public interface AccountsRepository extends JpaRepository<Account, Long> {
 
-public interface AccountsRepository extends CrudRepository<Account, Long> {
-    List<Account> findByFirstNameOrLastNameContains(String name);
 }
