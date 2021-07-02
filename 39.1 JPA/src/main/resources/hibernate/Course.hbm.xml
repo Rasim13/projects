@@ -1,9 +1,9 @@
-<!--<?xml version = "1.0" encoding = "utf-8"?>-->
-<!--<!DOCTYPE hibernate-mapping PUBLIC-->
-<!--        "-//Hibernate/Hibernate Mapping DTD//EN"-->
-<!--        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">-->
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
-<!--<hibernate-mapping>-->
+<hibernate-mapping>
 <!--    <class name="ru.itis.hibernate.models.Course">-->
 <!--        <id name="id" type="java.lang.Long">-->
 <!--&lt;!&ndash;            база данных сама генерирует id (identity)&ndash;&gt;-->
@@ -20,4 +20,4 @@
 <!--        </bag>-->
 <!--    </class>-->
 
-<!--</hibernate-mapping>-->
+</hibernate-mapping>
