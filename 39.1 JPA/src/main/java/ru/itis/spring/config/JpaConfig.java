@@ -21,8 +21,6 @@ import java.util.Properties;
 @ComponentScan("ru.itis.spring")
 public class JpaConfig {
 
-
-
     // компонент spring'a который создает EntityManager (данный бин установит связь между spring и hibernate, EntityManager это интерфейс jpa
     // который позволяет работать с базой данных)
     @Bean
@@ -59,8 +57,8 @@ public class JpaConfig {
         return config;
     }
 
-    @Bean
     // данный бин отвечает за автоматическое открытие и закрытие транзакции
+    @Bean
     public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
         JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
         jpaTransactionManager.setEntityManagerFactory(entityManagerFactory);

@@ -11,10 +11,10 @@ import java.util.List;
 @Repository
 public class CoursesRepositoryJpaImpl implements CoursesRepository {
 
-    @PersistenceContext
+    @PersistenceContext // предназначена для автоматического связывания entityManager с бином
     private EntityManager entityManager;
 
-    @Transactional
+    @Transactional // определяет область действия одной транзакции в БД
     public void save(Course course) {
         entityManager.persist(course);
     }
