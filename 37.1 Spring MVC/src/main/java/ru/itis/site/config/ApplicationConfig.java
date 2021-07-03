@@ -32,7 +32,7 @@ import java.util.Properties;
 
 
 @Configuration
-@PropertySource("classpath:db.properties")
+@PropertySource("classpath:application.properties")
 @ComponentScan("ru.itis.site")
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = "ru.itis.site.repositories")
@@ -69,9 +69,9 @@ public class ApplicationConfig {
 
     private Properties properties() {
         Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto","validate"); // параметр validate сверит таблцы в БД с моделью
-        properties.setProperty("hibernate.show_sql", "true");
-        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQL9Dialect");
+        properties.setProperty("hibernate.hbm2ddl.auto", environment.getProperty("hibernate.hbm2ddl.auto")); // параметр validate сверит таблцы в БД с моделью
+        properties.setProperty("hibernate.show_sql", environment.getProperty("hibernate.show_sql"));
+        properties.setProperty("hibernate.dialect", environment.getProperty("hibernate.dialect"));
         return properties;
     }
 

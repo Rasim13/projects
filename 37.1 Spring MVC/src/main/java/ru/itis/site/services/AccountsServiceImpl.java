@@ -1,6 +1,7 @@
 package ru.itis.site.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import ru.itis.site.dto.AccountDto;
 import ru.itis.site.dto.SearchAccountDto;
@@ -11,6 +12,7 @@ import java.util.List;
 
 import static ru.itis.site.dto.SearchAccountDto.from;
 
+@Profile("production")
 @Service
 public class AccountsServiceImpl implements AccountsService {
 
