@@ -15,8 +15,7 @@ public class LiveSearchController {
     @Autowired
     private MovieService movieService;
 
-    @RequestMapping (value = "/movie", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping (value = "/movie", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 
     @ResponseBody
     public List<Movie> searchMovie(@RequestParam String title) {

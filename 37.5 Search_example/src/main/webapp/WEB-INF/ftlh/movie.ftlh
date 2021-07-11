@@ -34,7 +34,7 @@
     </script>
 </head>
 <body>
-    <form>
+    <form action = "/movie" method="post">
         <p><b>Введите название фильма</b></p>
         <input id="movieTitle" type = "text" placeholder="search movie title">
     </form>
