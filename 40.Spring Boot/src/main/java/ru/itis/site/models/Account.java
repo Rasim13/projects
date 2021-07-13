@@ -14,6 +14,11 @@ import java.util.List;
 @Builder
 @Entity
 public class Account {
+
+    public enum State {
+        CONFIRMED, NOT_CONFIRMED, BANNED
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,12 +27,17 @@ public class Account {
     private String firstName;
     @Column(name = "last_name")
     private String lastName;
-    private Integer experience;
+//    private Integer experience;
     private String email;
     @Column(name = "hash_password")
     private String hashPassword;
 
-    @ManyToMany (mappedBy = "drivers")
-    private List<Car> cars;
+    @Enumerated(value = EnumType.STRING) //для конвертации enum в строку в БД
+    private State state;
+
+    private String confirmId;
+
+//    @ManyToMany (mappedBy = "drivers")
+//    private List<Car> cars;
 
 }
