@@ -9,7 +9,7 @@
         <input id="email" name="email" placeholder="Email">
     </label>
     <label for="password">Введите пароль:
-        <input id="password" name="password" placeholder="Password">
+        <input id="password" type="password" name="password" placeholder="Password">
     </label>
     <input type="submit" value="Вход">
 </form>
