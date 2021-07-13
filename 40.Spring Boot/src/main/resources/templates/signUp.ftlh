@@ -3,22 +3,32 @@
 <#import "spring.ftl" as spring/>
 <head>
     <title>Регистрация</title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
 </head>
 <body>
 <p><a href="?lang=ru">РУ</a></p>
 <p><a href="?lang=en">EN</a></p>
+<@spring.bind "signUpForm"/>
 <form action="/signUp" method="post">
     <label for="firstName"><@spring.message 'signUp.label.for.firstName'/>
-        <input id="firstName" name="firstName" placeholder="Имя">
+        <@spring.formInput "signUpForm.firstName"/>
+        <@spring.showErrors "<br>" "error"/>
     </label>
     <label for="lastName"><@spring.message 'signUp.label.for.lastName'/>
-        <input id="lastName" name="lastName" placeholder="Last name">
+        <@spring.formInput "signUpForm.lastName"/>
+        <@spring.showErrors "<br>" "error"/>
     </label>
     <label for="email"><@spring.message 'signUp.label.for.email'/>
-        <input id="email" name="email" placeholder="Email">
+        <@spring.formInput "signUpForm.email"/>
+        <@spring.showErrors "<br>" "error"/>
     </label>
     <label for="password"><@spring.message 'signUp.label.for.password'/>
-        <input type="password" id="password" name="password" placeholder="Password">
+        <@spring.formInput "signUpForm.password"/>
+        <@spring.showErrors "<br>" "error"/>
     </label>
     <input type="submit" value="Регистрация">
 </form>

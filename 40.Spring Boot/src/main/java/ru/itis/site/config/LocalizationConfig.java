@@ -60,4 +60,13 @@ public class LocalizationConfig implements WebMvcConfigurer {
         return messageSource;
     }
 
+    // добавляем валидатор
+    @Bean
+    public LocalValidatorFactoryBean getValidator() {
+        LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
+        // указываем откуда брать файл для валидации
+        bean.setValidationMessageSource(messageSource());
+        return bean;
+    }
+
 }
