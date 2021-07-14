@@ -19,6 +19,10 @@ public class Account {
         CONFIRMED, NOT_CONFIRMED, BANNED
     }
 
+    public enum Role {
+        ADMIN, USER
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -34,6 +38,9 @@ public class Account {
 
     @Enumerated(value = EnumType.STRING) //для конвертации enum в строку в БД
     private State state;
+
+    @Enumerated(value = EnumType.STRING) //для конвертации enum в строку в БД
+    private Role role;
 
     private String confirmId;
 
