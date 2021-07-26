@@ -1,4 +1,4 @@
-package ru.itis.site.models;
+package ru.itits.site.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,14 +7,12 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Entity
 public class Account {
-
     public enum State {
         CONFIRMED, NOT_CONFIRMED, BANNED
     }
@@ -31,7 +29,7 @@ public class Account {
     private String firstName;
     @Column(name = "last_name")
     private String lastName;
-//    private Integer experience;
+    //    private Integer experience;
     private String email;
     @Column(name = "hash_password")
     private String hashPassword;
@@ -43,8 +41,4 @@ public class Account {
     private Role role;
 
     private String confirmId;
-
-//    @ManyToMany (mappedBy = "drivers")
-//    private List<Car> cars;
-
 }

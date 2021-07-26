@@ -13,16 +13,22 @@ import java.util.Map;
 @Repository
 public class MovieRepositoryJdbcTemplateImpl implements MovieRepository {
 
-    private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+//    private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+
+    private final JdbcTemplate jdbcTemplate;
 
     //language=SQL
-    private static final String SQL_SEARCH = "select * from movie where movie_title ilike = ?";
+    private static final String SQL_SEARCH = "select * from movie where movie_title like = ?";
 
     //language=SQL
     private static final String SQL_SELECT_ALL = "select * from movie";
 
-    public MovieRepositoryJdbcTemplateImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
-        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+//    public MovieRepositoryJdbcTemplateImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+//        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+//    }
+
+    public MovieRepositoryJdbcTemplateImpl(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     // строка из БД мапиться (сопоставляется) в модель Movie
@@ -33,13 +39,13 @@ public class MovieRepositoryJdbcTemplateImpl implements MovieRepository {
                     .build();
 
     @Override
-    public List findAll() {
-        return namedParameterJdbcTemplate.query(SQL_SELECT_ALL, movieRowMapper);
+    public List<Movie> findAll() {
+        return jdbcTemplate.query(SQL_SELECT_ALL, movieRowMapper);
     }
 
     @Override
     public List<Movie> findByMovieContains(String title) {
-        Map<String, Object> params = Collections.singletonMap("query","%" + title + "%");
-        return namedParameterJdbcTemplate.query(SQL_SEARCH, params, movieRowMapper);
+//        Map<String, Object> params = Collections.singletonMap("query","%" + title + "%");
+        return jdbcTemplate.query("SELECT * FROM movie WHERE movie_title LIKE '%" + title + "%'", movieRowMapper);
     }
 }

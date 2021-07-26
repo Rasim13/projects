@@ -37,6 +37,5 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public AccountDto addUser(SignUpForm form) {
         return signUpService.signUp(form);
-
     }
 }

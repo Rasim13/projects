@@ -10,6 +10,7 @@
     </style>
 </head>
 <body>
+<a href="/">Главная страница</a>
 <p><a href="?lang=ru">РУ</a></p>
 <p><a href="?lang=en">EN</a></p>
 <@spring.bind "signUpForm"/>
@@ -26,12 +27,12 @@
         <@spring.formInput "signUpForm.email"/>
         <@spring.showErrors "<br>" "error"/>
     </label>
-    <label for="password" type = "password"><@spring.message 'signUp.label.for.password'/>
+    <label for="password"><@spring.message 'signUp.label.for.password'/>
         <@spring.formInput "signUpForm.password"/>
         <@spring.showErrors "<br>" "error"/>
     </label>
     <input type="submit" value="Регистрация">
 </form>
+
 </body>
 </html>
-

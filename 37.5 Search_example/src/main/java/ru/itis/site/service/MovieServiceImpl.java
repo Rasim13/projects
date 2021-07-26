@@ -21,4 +21,9 @@ public class MovieServiceImpl implements MovieService {
     public List<Movie> search(String query) {
         return movieRepository.findByMovieContains(query);
     }
+
+    @Override
+    public List<Movie> findAll() {
+        return movieRepository.findAll();
+    }
 }

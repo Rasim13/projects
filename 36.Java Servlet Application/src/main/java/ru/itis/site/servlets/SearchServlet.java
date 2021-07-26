@@ -4,6 +4,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import ru.itis.site.config.ApplicationConfig;
 import ru.itis.site.dto.SearchAccountDto;
+import ru.itis.site.sevices.AccountsService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

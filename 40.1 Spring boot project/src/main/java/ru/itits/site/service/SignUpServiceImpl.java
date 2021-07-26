@@ -1,17 +1,16 @@
-package ru.itis.site.services;
+package ru.itits.site.service;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.itis.site.forms.SignUpForm;
-import ru.itis.site.models.Account;
-import ru.itis.site.repositories.AccountsRepository;
-import ru.itis.site.utils.EmailUtil;
+import ru.itits.site.forms.SignUpForm;
+import ru.itits.site.models.Account;
+import ru.itits.site.repositories.AccountsRepository;
+import ru.itits.site.utils.EmailUtil;
 
 import java.io.StringWriter;
 import java.util.Collections;

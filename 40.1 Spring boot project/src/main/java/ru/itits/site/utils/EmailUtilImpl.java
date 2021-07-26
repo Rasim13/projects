@@ -1,4 +1,4 @@
-package ru.itis.site.utils;
+package ru.itits.site.utils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

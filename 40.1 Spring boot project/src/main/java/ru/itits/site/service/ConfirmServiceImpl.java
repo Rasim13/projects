@@ -1,10 +1,10 @@
-package ru.itis.site.services;
+package ru.itits.site.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.itis.site.models.Account;
-import ru.itis.site.repositories.AccountsRepository;
+import ru.itits.site.models.Account;
+import ru.itits.site.repositories.AccountsRepository;
 
 import java.util.Optional;
 

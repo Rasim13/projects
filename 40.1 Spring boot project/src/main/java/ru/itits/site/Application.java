@@ -1,4 +1,4 @@
-package ru.itis.site;
+package ru.itits.site;
 
 import freemarker.template.Configuration;
 import org.springframework.boot.SpringApplication;
