@@ -4,8 +4,9 @@
     <title>Вход</title>
 </head>
 <body>
-<a href="/">Главная страница</a>
-<br>
+
+<button onclick="document.location = '/'">Главная страница</button>
+
 <form action="/signIn" method="post">
     <label for="email">Введите email:
         <input id="email" name="email" placeholder="Email">

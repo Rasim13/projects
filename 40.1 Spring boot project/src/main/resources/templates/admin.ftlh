@@ -8,8 +8,11 @@
     <title>Главная страница администратора</title>
 </head>
 <body>
-<a href="/admin/users">Пользователи</a>
-<a href="/admin/products">Товары</a>
-<a href="/logout">Выйти</a>
+
+<button onclick="document.location = '/admin/users'">Пользователи</button>
+
+<button onclick="document.location = '/admin/products'">Товары</button>
+
+<button onclick="document.location = '/logout'">Выйти</button>
 </body>
 </html>

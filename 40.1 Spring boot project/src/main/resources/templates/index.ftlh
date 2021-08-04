@@ -9,10 +9,12 @@
 </head>
 <body>
 <h1>Добро пожаловать!!!</h1>
-<div>
-    <h4><a href="/signIn">Войти</a></h4>
-    <h4><a href="/signUp">Зарегистрироваться</a></h4>
-    <h4><a href="/admin">Страница администратора</a></h4>
-</div>
+
+<button onclick="document.location = '/signIn'">Войти</button>
+
+<button onclick="document.location = '/signUp'">Зарегистрироваться</button>
+
+<button onclick="document.location = '/admin'">Страница администратора</button>
+
 </body>
 </html>

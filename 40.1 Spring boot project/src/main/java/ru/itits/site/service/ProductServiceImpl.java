@@ -8,11 +8,12 @@ import ru.itits.site.models.Product;
 import ru.itits.site.repositories.ProductsRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService {
 
-    private final ProductsRepository productsRepository ;
+    private final ProductsRepository productsRepository;
 
     @Autowired
     public ProductServiceImpl(ProductsRepository productsRepository) {
@@ -33,4 +34,15 @@ public class ProductServiceImpl implements ProductService {
         productsRepository.save(product);
         return ProductDto.from(product);
     }
+
+    @Override
+    public void deleteProductById(Long id) {
+        productsRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<Product> findById(Long id) {
+        return productsRepository.findById(id);
+    }
 }
+

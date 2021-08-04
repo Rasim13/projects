@@ -25,6 +25,7 @@ public class SignUpController {
 
     @PostMapping("/signUp")
     public String signUpUser(@Valid SignUpForm form, BindingResult bindingResult, Model model) {
+        //если есть ошибки
         if (bindingResult.hasErrors()) {
             //кладем эту форму с ошибками обратно в страницу
             model.addAttribute("signUpForm", form);

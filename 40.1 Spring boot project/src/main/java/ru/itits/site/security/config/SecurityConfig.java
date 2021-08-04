@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -28,26 +29,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        http.csrf().disable();
-//
-//        http.authorizeRequests()
-//                // доступ для всех пользователей
-//                .antMatchers("/").permitAll()
-//                //доступ для аутентифицированных пользователей
-//                .antMatchers("/store/**").authenticated()
-//                //доступ для пользователей с ролью ADMIN
-//                .antMatchers( "/admin", "/admin/**").hasAnyRole("ADMIN", "USER")
-//                .and()
-//                .formLogin()
-//                .loginPage("/signIn")
-//                // spring из view вытаскивает email для проверки
-//                .usernameParameter("email")
-//                // spring из view вытаскивает password для проверки
-//                .passwordParameter("password")
-//                //на этот url имеют доступ только те пользователи, которые правильно ввели пароль и email
-//                .defaultSuccessUrl("/store")
-//                //если пользователь  ввел неправильный пароль и email
-//                .failureUrl("/signIn?error")
-//                .permitAll();
+        http.csrf().disable();
+
+        http.authorizeRequests()
+                // доступ для всех пользователей
+                .antMatchers("/", "/shop/**","/addToCart/**","/signIn","/signUp").permitAll()
+                //доступ для аутентифицированных пользователей
+                .antMatchers("/shop/**").authenticated()
+                //доступ для пользователей с ролью ADMIN
+                .antMatchers( "/admin", "/admin/**").hasAuthority("ADMIN")
+                .anyRequest()
+                .authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/signIn")
+                .permitAll()
+                .failureUrl("/signIn?error=true")
+                .defaultSuccessUrl("/shop")
+                .usernameParameter("email")
+                .passwordParameter("password");
     }
 }

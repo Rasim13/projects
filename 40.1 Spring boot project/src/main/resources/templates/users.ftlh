@@ -8,7 +8,9 @@
     <title>Пользователи</title>
 </head>
 <body>
-<a href="/admin">Главная страница администратора</a>
+
+<button onclick="document.location = '/admin'">Главная страница администратора</button>
+
 <table border="1">
     <thead>
     <tr>

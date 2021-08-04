@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.itits.site.models.Product;
 
+import javax.validation.constraints.Positive;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,6 +18,7 @@ public class ProductDto {
 
     private Long id;
     private String name;
+
     private Integer price;
 
     public static ProductDto from(Product product) {
