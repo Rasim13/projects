@@ -51,7 +51,7 @@
         </label>
         <label for="price">Цена
 <#--        <input type="text" name = "price" placeholder="Enter price">-->
-                <@spring.formInput "form.price"/>
+                <@spring.formInput ""/>
                 <@spring.showErrors "<br>" "error"/>
         </label>
         <input type="submit" value="Добавить товар">

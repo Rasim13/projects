@@ -49,7 +49,7 @@ public class AdminController {
     @PostMapping(value = "/admin/products/add")
     public String addProductPost (@Valid ProductForm form, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("productAdd",form);
+            model.addAttribute("productForm",form);
             return "productAdd";
         }
 
