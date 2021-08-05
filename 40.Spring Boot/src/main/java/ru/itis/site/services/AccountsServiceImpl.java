@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import ru.itis.site.dto.AccountDto;
 import ru.itis.site.dto.SearchAccountDto;
 import ru.itis.site.forms.SignUpForm;
+import ru.itis.site.models.Account;
 import ru.itis.site.repositories.AccountsRepository;
 
 import java.util.List;
@@ -23,6 +24,14 @@ public class AccountsServiceImpl implements AccountsService {
     @Override
     public List<AccountDto> getAll() {
         return AccountDto.from(accountsRepository.findAll());
+    }
+
+    @Override
+    public void ban(Long userId) {
+        Account account = accountsRepository.getById(userId);
+        account.setState(Account.State.BANNED);
+        accountsRepository.save(account);
+
     }
 
 }

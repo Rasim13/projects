@@ -9,4 +9,6 @@ import java.util.List;
 
 public interface AccountsService {
     List<AccountDto> getAll();
+
+    void ban(Long userId);
 }

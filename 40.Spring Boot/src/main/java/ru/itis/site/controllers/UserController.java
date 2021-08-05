@@ -21,4 +21,10 @@ public class UserController {
         model.addAttribute("accounts", accounts);
         return "users";
     }
+
+    @PostMapping("/users/{user-id}/ban")
+    public String banUser(@PathVariable("user-id") Long userId) {
+        accountService.ban(userId);
+        return "redirect:/users";
+    }
 }

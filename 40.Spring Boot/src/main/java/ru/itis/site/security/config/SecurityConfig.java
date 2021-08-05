@@ -2,18 +2,26 @@ package ru.itis.site.security.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+
+import javax.sql.DataSource;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private DataSource datasource;
 
     @Autowired
     @Qualifier(value = "accountUserDetailsService")
@@ -26,13 +34,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable();
+//        http.csrf().disable();
 
         http.authorizeRequests()
                 .antMatchers("/signUp").permitAll()
                 .antMatchers("users/confirm/**").permitAll()
                 .antMatchers("/profile/**").authenticated()
-                .antMatchers("/users").hasAuthority("ADMIN")
+                .antMatchers("/users/**").hasAuthority("ADMIN")
+                .and()
+                //говорим спрингу, что будет такой параметр remember me
+                .rememberMe().rememberMeParameter("remember-me")
+                //для идентификаци пользователей в сессс используем бин persistentTokenRepository
+                .tokenRepository(persistentTokenRepository())
+                //этот параметр remember me может существовать
+                .tokenValiditySeconds(60 * 60 * 24 * 365)
                 .and()
                 .formLogin()
                 .loginPage("/signIn")
@@ -41,5 +56,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/profile")
                 .failureUrl("/signIn?error")
                 .permitAll();
+    }
+
+    @Bean
+    public PersistentTokenRepository persistentTokenRepository() {
+        JdbcTokenRepositoryImpl jdbcTokenRepository = new JdbcTokenRepositoryImpl();
+        jdbcTokenRepository.setDataSource(datasource);
+        return jdbcTokenRepository;
     }
 }

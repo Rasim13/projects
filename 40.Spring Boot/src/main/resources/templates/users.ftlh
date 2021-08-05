@@ -38,6 +38,9 @@
     </script>
 </head>
 <body>
+<#--<h1>${_csrf.parameterName}</h1>-->
+<#--<br>-->
+<#--<h1>${_csrf.token}</h1>-->
 <h1>Всем привет!</h1>
 <table id="usersTable">
     <thead>
@@ -49,10 +52,14 @@
     </thead>
     <tbody>
     <#list accounts as account>
+        <form id="${account.id}" method="post" action="/users/${account.id}/ban">
+        </form>
         <tr>
             <td>${account.firstName}</td>
             <td>${account.lastName}</td>
             <td>${account.email}</td>
+            <td><input form="${account.id}" type="submit" value="Заблокировать"></td>
+            <td><input form="${account.id}" type="hidden" name="${_csrf.parametrName}" value="${_csrf.token}"></td>
         </tr>
     </#list>
     </tbody>

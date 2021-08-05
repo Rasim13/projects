@@ -4,12 +4,19 @@
     <title>Вход</title>
 </head>
 <body>
+<#--<h1>${_csrf.parameterName}</h1>-->
+<#--<br>-->
+<#--<h1>${_csrf.token}</h1>-->
 <form action="/signIn" method="post">
     <label for="email">Введите email:
         <input id="email" name="email" placeholder="Email">
     </label>
+    <input type="hidden" name="${_csrf.parametrName}" value="${_csrf.token}">
     <label for="password">Введите пароль:
         <input id="password" type="password" name="password" placeholder="Password">
+        <label>
+            <input type="checkbox" name="remember-me"> Запомни меня
+        </label>
     </label>
     <input type="submit" value="Вход">
 </form>
