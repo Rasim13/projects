@@ -22,6 +22,7 @@
                 type: "POST",
                 url: "http://localhost/api/users",
                 data: JSON.stringify(body),
+                headers:{'X-CSRF-TOKEN' : '${_csrf.token}'},
                 success: function (response) {
 
                     let html = '<tr>' +
