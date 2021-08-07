@@ -1,5 +1,6 @@
 package ru.itis.site.controllers;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,8 @@ import ru.itis.site.security.details.AccountUserDetails;
 
 @Controller
 public class ProfileController {
+
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/profile")
     public String getProfilePage(Model model, @AuthenticationPrincipal AccountUserDetails userDetails) {
         model.addAttribute("email", userDetails.getUsername());

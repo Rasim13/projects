@@ -11,7 +11,7 @@
     <label for="email">Введите email:
         <input id="email" name="email" placeholder="Email">
     </label>
-    <input type="hidden" name="${_csrf.parametrName}" value="${_csrf.token}">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
     <label for="password">Введите пароль:
         <input id="password" type="password" name="password" placeholder="Password">
         <label>

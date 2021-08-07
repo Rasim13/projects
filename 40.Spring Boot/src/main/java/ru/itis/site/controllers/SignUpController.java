@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import ru.itis.site.forms.SignUpForm;
 import ru.itis.site.services.SignUpService;
 
+import javax.annotation.security.PermitAll;
 import javax.validation.Valid;
 
 @Controller
@@ -17,12 +18,14 @@ public class SignUpController {
     @Autowired
     private SignUpService signUpService;
 
+    @PermitAll
     @GetMapping("/signUp")
     public String getSignUpPage(Model model) {
         model.addAttribute("signUpForm", new SignUpForm());
         return "signUp";
     }
 
+    @PermitAll
     @PostMapping("/signUp")
     public String signUpUser(@Valid SignUpForm form, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {

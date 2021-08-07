@@ -59,7 +59,7 @@
             <td>${account.lastName}</td>
             <td>${account.email}</td>
             <td><input form="${account.id}" type="submit" value="Заблокировать"></td>
-            <td><input form="${account.id}" type="hidden" name="${_csrf.parametrName}" value="${_csrf.token}"></td>
+            <td><input form="${account.id}" type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"></td>
         </tr>
     </#list>
     </tbody>
