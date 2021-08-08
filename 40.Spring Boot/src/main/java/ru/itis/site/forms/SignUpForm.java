@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.itis.site.validation.NotSameNames;
 import ru.itis.site.validation.ValidPassword;
 
 import javax.validation.constraints.Email;
@@ -14,6 +15,7 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@NotSameNames(firstNameField = "firstName", lastNameField = "lastName", message = "{error.names.bad}")
 public class SignUpForm {
 
     @Size(min = 4, max = 20, message = "{error.firstName.size}")

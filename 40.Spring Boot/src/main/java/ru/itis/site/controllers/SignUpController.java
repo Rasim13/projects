@@ -28,7 +28,13 @@ public class SignUpController {
     @PermitAll
     @PostMapping("/signUp")
     public String signUpUser(@Valid SignUpForm form, BindingResult bindingResult, Model model) {
+        //если есть ошибки
         if (bindingResult.hasErrors()) {
+            if (bindingResult.getAllErrors()
+                        .stream()
+                        .anyMatch(error -> error.getCodes()[0].equals("signUpForm.NotSameNames"))) {
+                model.addAttribute("namesError", new Object());
+            }
             //кладем эту форму с ошибками обратно в страницу
             model.addAttribute("signUpForm", form);
             // возращаем страницу

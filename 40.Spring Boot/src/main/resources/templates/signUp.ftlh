@@ -14,6 +14,9 @@
 <p><a href="?lang=en">EN</a></p>
 <@spring.bind "signUpForm"/>
 <form action="/signUp" method="post">
+    <#if namesError??>
+        <p style=".error"><@spring.message 'error.names.bad'/></p>
+    </#if>
     <label for="firstName"><@spring.message 'signUp.label.for.firstName'/>
         <@spring.formInput "signUpForm.firstName"/>
         <@spring.showErrors "<br>" "error"/>
@@ -30,6 +33,7 @@
         <@spring.formInput "signUpForm.password"/>
         <@spring.showErrors "<br>" "error"/>
     </label>
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
     <input type="submit" value="Регистрация">
 </form>
 </body>
