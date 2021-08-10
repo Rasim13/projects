@@ -1,5 +1,6 @@
 package ru.itis.education.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CourseDto {
     private Long id;
     private String title;
@@ -21,12 +23,21 @@ public class CourseDto {
     private List<LessonDto> lessons;
 
     public static CourseDto from(Course course) {
-        return CourseDto.builder()
+        CourseDto result = CourseDto.builder()
                 .id(course.getId())
                 .title(course.getTitle())
-                .teacher(UserDto.from(course.getTeacher()))
-                .lessons(LessonDto.from(course.getLessons()))
                 .build();
+
+        if (course.getTeacher() != null) {
+            result.setTeacher(UserDto.from(course.getTeacher()));
+        }
+
+        if (course.getLessons() != null) {
+            result.setLessons(LessonDto.from(course.getLessons()));
+        }
+
+        return result;
+
     }
 
     public static List<CourseDto> from(List<Course> courses) {

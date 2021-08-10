@@ -36,5 +36,8 @@ public class Course {
     @OneToMany(mappedBy = "course")
     private List<Lesson> lessons;
 
+    public boolean ofTeacher(User teacher) {
+        return this.teacher.equals(teacher);
+    }
 
 }

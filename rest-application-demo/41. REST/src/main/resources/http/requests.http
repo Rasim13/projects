@@ -1,6 +1,9 @@
-GET localhost:8080/users
+GET localhost/users
 
 ###
 
-GET localhost/users/1/courses
+GET localhost/users/4/courses
 
+###
+
+DELETE localhost/users/4/courses/2
