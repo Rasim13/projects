@@ -1,0 +1,6 @@
+GET localhost:8080/users
+
+###
+
+GET localhost/users/1/courses
+
