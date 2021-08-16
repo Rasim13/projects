@@ -7,3 +7,15 @@ GET localhost/users/4/courses
 ###
 
 DELETE localhost/users/4/courses/2
+
+###
+
+POST localhost/courses
+
+Content-Type: application/json
+
+{
+"startDate" : "2018-02-02",
+"finishDate" : "2018-03-03",
+"title" : "SQL"
+}
