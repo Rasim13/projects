@@ -1,11 +1,13 @@
 package ru.itis.education.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ru.itis.education.dto.CourseDto;
 import ru.itis.education.forms.CourseForm;
 import ru.itis.education.services.CoursesService;
 
+import java.awt.*;
 import java.util.List;
 
 @RestController

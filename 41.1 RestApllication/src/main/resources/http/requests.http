@@ -2,13 +2,26 @@ GET localhost:8080/users
 
 ###
 
-POST localhost:8080/events
-
-Content-type: application/json
+POST localhost:8080/users
+Content-Type: application/json
 
 {
-"date":"2021-08-17",
-"startTime":"12:00:00",
-"finishTime":"13:00:00",
-"nameOfTheEvent":"Встреча №1"
+  "name" : "Расим",
+  "email" : "rasim@gmail.com"
 }
+
+###
+
+POST localhost:8080/events/4
+Content-Type: application/json
+
+{
+  "date" : "2021-08-23",
+  "startTime" : "13:00:00",
+  "finishTime" : "13:30:00",
+  "nameOfTheEvent" : "to do homework"
+}
+
+###
+
+GET localhost:8080/user/4/events

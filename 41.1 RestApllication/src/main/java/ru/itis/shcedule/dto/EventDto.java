@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.itis.shcedule.models.Event;
+import ru.itis.shcedule.models.User;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

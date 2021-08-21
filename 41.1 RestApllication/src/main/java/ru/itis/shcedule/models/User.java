@@ -1,11 +1,9 @@
 package ru.itis.shcedule.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -24,10 +22,18 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "password")
-    private String password;
+    @Column(name = "name")
+    private String name;
 
-    @OneToMany
+    @OneToMany (mappedBy = "user")
     private List<Event> events;
+
+    public void addEventToUser(Event event) {
+        if (events == null) {
+            events = new ArrayList<>();
+        }
+        events.add(event);
+        event.setUser(this);
+    }
 
 }

@@ -5,4 +5,6 @@ import ru.itis.shcedule.forms.EventForm;
 
 public interface EventsService {
     EventDto addEvent(EventForm event);
+
+    EventDto addEventToUser(EventForm event, Long userId);
 }

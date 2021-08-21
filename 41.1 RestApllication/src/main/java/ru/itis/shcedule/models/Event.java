@@ -7,9 +7,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
+
 
 @Data
 @AllArgsConstructor
@@ -32,6 +32,8 @@ public class Event {
 
     @Column(name = "finish_time")
     private LocalTime finishTime;
+
+    @Column(name = "date")
     private LocalDate date;
 
     @ManyToOne
