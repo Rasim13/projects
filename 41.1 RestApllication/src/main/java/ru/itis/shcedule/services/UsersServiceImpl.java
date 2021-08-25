@@ -7,8 +7,8 @@ import ru.itis.shcedule.dto.UserDto;
 import ru.itis.shcedule.forms.UserForm;
 import ru.itis.shcedule.models.Event;
 import ru.itis.shcedule.models.User;
-import ru.itis.shcedule.repositories.EventsRepositories;
-import ru.itis.shcedule.repositories.UsersRepositories;
+import ru.itis.shcedule.repositories.EventsRepository;
+import ru.itis.shcedule.repositories.UsersRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,27 +19,21 @@ import static ru.itis.shcedule.dto.UserDto.from;
 public class UsersServiceImpl implements UsersService {
 
     @Autowired
-    private UsersRepositories usersRepositories;
+    private UsersRepository usersRepository;
 
     @Autowired
-    private EventsRepositories eventsRepositories;
+    private EventsRepository eventsRepository;
 
     @Override
     public List<UserDto> getUsers() {
-        return from(usersRepositories.findAll());
+        return from(usersRepository.findAll());
     }
 
     @Override
     public List<EventDto> getEventsByUser(Long userId) {
-        User user = usersRepositories.findById(userId).orElseThrow(IllegalArgumentException::new);
-
-        if (user == null) {
-            throw new IllegalArgumentException("User doesn't exist with " + userId);
-        }
-
-        List<Event> event = eventsRepositories.findAll();
-
-        return event.stream().map(EventDto::from).collect(Collectors.toList());
+        User user = usersRepository.findById(userId).orElseThrow(IllegalArgumentException::new);
+        List<Event> events = user.getEvents();
+        return events.stream().map(EventDto::from).collect(Collectors.toList());
     }
 
     @Override
@@ -48,7 +42,8 @@ public class UsersServiceImpl implements UsersService {
                .email(userForm.getEmail())
                .name(userForm.getName())
                .build();
-        usersRepositories.save(newUser);
+        usersRepository.save(newUser);
         return from(newUser);
     }
+
 }

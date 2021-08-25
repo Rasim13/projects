@@ -6,13 +6,9 @@ import ru.itis.shcedule.dto.EventDto;
 import ru.itis.shcedule.forms.EventForm;
 import ru.itis.shcedule.models.Event;
 import ru.itis.shcedule.models.User;
-import ru.itis.shcedule.repositories.EventsRepositories;
-import ru.itis.shcedule.repositories.UsersRepositories;
+import ru.itis.shcedule.repositories.EventsRepository;
+import ru.itis.shcedule.repositories.UsersRepository;
 
-import java.time.LocalDate;
-
-import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -22,65 +18,93 @@ import static ru.itis.shcedule.dto.EventDto.from;
 public class EventsServiceImpl implements EventsService {
 
     @Autowired
-    private EventsRepositories eventsRepositories;
+    private EventsRepository eventsRepository;
 
     @Autowired
-    private UsersRepositories usersRepositories;
+    private UsersRepository usersRepository;
 
-    @Override
-    public EventDto addEvent(EventForm event) {
-        Event newEvent = Event.builder()
-                .date(LocalDate.parse(event.getDate()))
-                .nameOfTheEvent(event.getNameOfTheEvent())
-                .startTime(LocalTime.parse(event.getStartTime()))
-                .finishTime(LocalTime.parse(event.getFinishTime()))
-                .build();
-                eventsRepositories.save(newEvent);
-                return from(newEvent);
-    }
 
     @Override
     public EventDto addEventToUser(EventForm event, Long userId) {
-        Event newEvent = null;
-        User user = null;
 
-        boolean checkTime;
+        User user = usersRepository.findById(userId).orElseThrow(IllegalArgumentException::new);
 
-        user = usersRepositories.findById(userId).orElseThrow(IllegalArgumentException::new);
+       boolean checkTime = checkTime(event, user);
 
-        checkTime = getTimeCheck(event, userId);
-
-        if (user == null) {
-
-            throw new IllegalArgumentException("User doesn't exist with " + userId);
+        if (checkTime) {
+            throw new IllegalArgumentException("You can't add event this time");
         }
+        Event newEvent = Event.builder()
+                .date(event.getDate())
+                .nameOfTheEvent(event.getNameOfTheEvent())
+                .startTime(event.getStartTime())
+                .finishTime(event.getFinishTime())
+                .build();
 
+        user.addEventToUser(newEvent);
 
-            newEvent = Event.builder()
-                    .date(LocalDate.parse(event.getDate()))
-                    .nameOfTheEvent(event.getNameOfTheEvent())
-                    .startTime(LocalTime.parse(event.getStartTime()))
-                    .finishTime(LocalTime.parse(event.getFinishTime()))
-                    .build();
-
-            user.addEventToUser(newEvent);
-
-            eventsRepositories.save(newEvent);
-
+        eventsRepository.save(newEvent);
 
         return from(newEvent);
     }
 
-    public boolean getTimeCheck (EventForm eventForm, Long userId) {
-        User user = usersRepositories.findById(userId).orElseThrow(IllegalArgumentException::new);
+    @Override
+    public EventDto addEventToSeveralUsers(EventForm event) {
 
-//        List<Event> events = eventsRepositories.findById(user.getId()).orElseThrow(IllegalArgumentException::new);
-//
-//        for (Event findEvent:events) {
-//            if (eventForm.getDate().equals(findEvent.getDate()) && !eventForm.getStartTime().equals(findEvent.getStartTime())) {
-//                return true;
-//            }
-//        }
+        User user = null;
+        Event newEvent = null;
+
+        List<User> users = event.getUsers();
+        for (User findUser: users) {
+            user = usersRepository.findById(findUser.getId()).orElseThrow(IllegalArgumentException::new);
+
+            boolean checkTime = checkTime(event, user);
+
+            if (user == null) {
+                throw new IllegalArgumentException();
+            }
+
+            if (checkTime) {
+                throw new IllegalArgumentException("You can't add event this time");
+            }
+                newEvent = Event.builder()
+                        .date(event.getDate())
+                        .nameOfTheEvent(event.getNameOfTheEvent())
+                        .startTime(event.getStartTime())
+                        .finishTime(event.getFinishTime())
+                        .build();
+
+                user.addEventToUser(newEvent);
+                eventsRepository.save(newEvent);
+        }
+        return from(newEvent);
+    }
+
+    public boolean checkTime (EventForm eventForm, User user) {
+        List<Event> events = user.getEvents();
+
+        if (events == null) {
+            throw new IllegalArgumentException("no events");
+        }
+        for (Event findEvent:events) {
+            if (findEvent.getDate().equals(eventForm.getDate())
+                    && findEvent.getStartTime().equals(eventForm.getStartTime())
+                        && findEvent.getFinishTime().equals(eventForm.getFinishTime())) {
+                return true;
+            }
+            if (findEvent.getDate().equals(eventForm.getDate())
+                    && eventForm.getStartTime().isAfter(findEvent.getStartTime())
+                        && eventForm.getStartTime().isBefore(findEvent.getFinishTime())) {
+                return true;
+            }
+
+            if (findEvent.getDate().equals(eventForm.getDate())
+                    && eventForm.getStartTime().isBefore(findEvent.getStartTime())
+                        && eventForm.getFinishTime().isAfter(findEvent.getStartTime())) {
+                return true;
+            }
+
+        }
         return false;
     }
 }

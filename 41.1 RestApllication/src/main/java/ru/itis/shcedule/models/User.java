@@ -1,5 +1,6 @@
 package ru.itis.shcedule.models;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "users")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class User {
 
     @Id
@@ -25,7 +27,10 @@ public class User {
     @Column(name = "name")
     private String name;
 
-    @OneToMany (mappedBy = "user")
+    @Column(name = "hash_password")
+    private String hashPassword;
+
+    @OneToMany (mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Event> events;
 
     public void addEventToUser(Event event) {

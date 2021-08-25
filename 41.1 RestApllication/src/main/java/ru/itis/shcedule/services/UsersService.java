@@ -12,4 +12,6 @@ public interface UsersService {
     List<EventDto> getEventsByUser(Long userId);
 
     UserDto addUser(UserForm user);
+
+//    List<TimeDto> getTimeByUsers(TimeForm timeForm);
 }

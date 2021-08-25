@@ -12,16 +12,32 @@ Content-Type: application/json
 
 ###
 
-POST localhost:8080/events/4
+POST localhost:8080/events/2
 Content-Type: application/json
 
 {
   "date" : "2021-08-23",
-  "startTime" : "13:00:00",
-  "finishTime" : "13:30:00",
-  "nameOfTheEvent" : "to do homework"
+  "startTime" : "14:30:00",
+  "finishTime" : "14:40:00",
+  "nameOfTheEvent" : "go to work"
 }
 
 ###
 
-GET localhost:8080/user/4/events
+GET localhost:8080/user/2/events
+
+
+###
+
+POST localhost:8080/events
+Content-Type: application/json
+
+{
+"date" : "2021-09-30",
+"startTime" : "11:15:00",
+"finishTime" : "11:35:00",
+"nameOfTheEvent" : "go to market",
+"users" : [ {"id" : 2}]
+}
+
+

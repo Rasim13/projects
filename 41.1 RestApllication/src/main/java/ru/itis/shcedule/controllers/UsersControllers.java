@@ -30,4 +30,10 @@ public class UsersControllers {
     public UserDto addUser(@RequestBody UserForm userForm) {
         return usersService.addUser(userForm);
     }
+
+    @GetMapping(value = "/user/{user-id}/evetnts", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<EventDto> getEventsSeveralUsers(@PathVariable("user-id") Long userId) {
+        return usersService.getEventsByUser(userId);
+    }
+
 }

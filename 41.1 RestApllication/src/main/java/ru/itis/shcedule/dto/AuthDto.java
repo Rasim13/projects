@@ -1,12 +1,11 @@
-package ru.itis.shcedule.forms;
+package ru.itis.shcedule.dto;
+
 
 import lombok.Data;
 
 @Data
-public class UserForm {
+public class AuthDto {
 
     private String email;
-    private String name;
     private String password;
-
 }
