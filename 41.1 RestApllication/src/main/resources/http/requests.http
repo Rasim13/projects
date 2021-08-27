@@ -1,5 +1,6 @@
 GET localhost/users
 
+
 ###
 
 POST localhost/users
@@ -22,11 +23,6 @@ Content-Type: application/json
   "finishTime" : "14:40:00",
   "nameOfTheEvent" : "go to work"
 }
-
-###
-
-GET localhost/user/2/events
-
 
 ###
 

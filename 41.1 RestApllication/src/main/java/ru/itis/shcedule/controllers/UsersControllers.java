@@ -2,6 +2,7 @@ package ru.itis.shcedule.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import ru.itis.shcedule.dto.EventDto;
 import ru.itis.shcedule.dto.UserDto;
@@ -16,22 +17,23 @@ public class UsersControllers {
     @Autowired
     private UsersService usersService;
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<UserDto> getUsers() {
         return usersService.getUsers();
     }
 
-    @GetMapping(value = "/user/{user-id}/events", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<EventDto> getEventsByUser(@PathVariable("user-id") Long userId) {
-        return usersService.getEventsByUser(userId);
-    }
+//    @GetMapping(value = "/user/{user-id}/events", produces = MediaType.APPLICATION_JSON_VALUE)
+//    public List<EventDto> getEventsByUser(@PathVariable("user-id") Long userId) {
+//        return usersService.getEventsByUser(userId);
+//    }
 
     @PostMapping("/users")
     public UserDto addUser(@RequestBody UserForm userForm) {
         return usersService.addUser(userForm);
     }
 
-    @GetMapping(value = "/user/{user-id}/evetnts", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/user/{user-id}/events", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<EventDto> getEventsSeveralUsers(@PathVariable("user-id") Long userId) {
         return usersService.getEventsByUser(userId);
     }

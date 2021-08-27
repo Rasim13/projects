@@ -1,10 +1,12 @@
 package ru.itis.shcedule.security.details;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import ru.itis.shcedule.models.User;
 
 import java.util.Collection;
+import java.util.Collections;
 
 public class AccountUserDetails implements UserDetails {
 
@@ -16,7 +18,8 @@ public class AccountUserDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(user.getRole().name());
+        return Collections.singleton(authority);
     }
 
     @Override
