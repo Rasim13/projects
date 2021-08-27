@@ -3,6 +3,7 @@ package ru.itis.shcedule.models;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,14 @@ import java.util.List;
 @Table(name = "users")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class User {
+
+    public enum State {
+        CONFIRMED, NOT_CONFIRMED, BANNED
+    }
+
+    public enum Role {
+        ADMIN, USER
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,6 +42,12 @@ public class User {
     @OneToMany (mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Event> events;
 
+    @Enumerated(value = EnumType.STRING) //для конвертации enum в строку в БД
+    private State state;
+
+    @Enumerated(value = EnumType.STRING) //для конвертации enum в строку в БД
+    private Role role;
+
     public void addEventToUser(Event event) {
         if (events == null) {
             events = new ArrayList<>();
@@ -40,5 +55,8 @@ public class User {
         events.add(event);
         event.setUser(this);
     }
+
+    @OneToMany(mappedBy = "user")
+    private List<Token> tokens;
 
 }

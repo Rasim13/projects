@@ -1,18 +1,19 @@
-GET localhost:8080/users
+GET localhost/users
 
 ###
 
-POST localhost:8080/users
+POST localhost/users
 Content-Type: application/json
 
 {
-  "name" : "Расим",
-  "email" : "rasim@gmail.com"
+  "name" : "Вадим",
+  "email" : "vadim@gmail.com",
+  "hashPassword" : "Qwerty001"
 }
 
 ###
 
-POST localhost:8080/events/2
+POST localhost/events/2
 Content-Type: application/json
 
 {
@@ -24,12 +25,12 @@ Content-Type: application/json
 
 ###
 
-GET localhost:8080/user/2/events
+GET localhost/user/2/events
 
 
 ###
 
-POST localhost:8080/events
+POST localhost/events
 Content-Type: application/json
 
 {
@@ -40,4 +41,12 @@ Content-Type: application/json
 "users" : [ {"id" : 2}]
 }
 
+###
+POST localhost/signIn
+Content-Type: application/json
+
+{
+  "email" : "vadim@gmail.com",
+  "hashPassword" : "Qwerty001"
+}
 

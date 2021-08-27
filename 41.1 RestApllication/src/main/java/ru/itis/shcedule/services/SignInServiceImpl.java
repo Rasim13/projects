@@ -30,15 +30,15 @@ public class SignInServiceImpl implements SignInService {
         Optional<User> userOptional = usersRepository.findByEmail(auth.getEmail());
 
         if (userOptional.isPresent()) {
+
             User user = userOptional.get();
 
-            if (passwordEncoder.matches(auth.getPassword(), user.getHashPassword())) {
+            if (passwordEncoder.matches(auth.getHashPassword(),user.getHashPassword())) {
                 String value = UUID.randomUUID().toString();
                 Token token = Token.builder()
                         .value(value)
                         .user(user)
                         .build();
-
                 tokensRepository.save(token);
                 return new TokenDto(value);
             } else {
@@ -48,6 +48,5 @@ public class SignInServiceImpl implements SignInService {
         } else {
             throw new IllegalArgumentException("Wrong email/password");
         }
-
     }
 }

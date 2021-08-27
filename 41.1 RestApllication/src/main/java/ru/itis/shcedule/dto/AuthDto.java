@@ -7,5 +7,5 @@ import lombok.Data;
 public class AuthDto {
 
     private String email;
-    private String password;
+    private String hashPassword;
 }

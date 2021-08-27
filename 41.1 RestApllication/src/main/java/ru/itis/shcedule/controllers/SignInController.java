@@ -8,6 +8,7 @@ import ru.itis.shcedule.dto.AuthDto;
 import ru.itis.shcedule.dto.TokenDto;
 import ru.itis.shcedule.services.SignInService;
 
+
 import javax.annotation.security.PermitAll;
 
 @RestController
@@ -20,6 +21,5 @@ public class SignInController {
     @PostMapping("/signIn")
     public TokenDto signIn(@RequestBody AuthDto auth) {
         return signInService.signIn(auth);
-
     }
 }

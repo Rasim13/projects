@@ -1,13 +1,13 @@
 package ru.itis.shcedule.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.itis.shcedule.dto.EventDto;
 import ru.itis.shcedule.dto.UserDto;
 import ru.itis.shcedule.forms.UserForm;
 import ru.itis.shcedule.models.Event;
 import ru.itis.shcedule.models.User;
-import ru.itis.shcedule.repositories.EventsRepository;
 import ru.itis.shcedule.repositories.UsersRepository;
 
 import java.util.List;
@@ -22,7 +22,7 @@ public class UsersServiceImpl implements UsersService {
     private UsersRepository usersRepository;
 
     @Autowired
-    private EventsRepository eventsRepository;
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public List<UserDto> getUsers() {
@@ -41,6 +41,7 @@ public class UsersServiceImpl implements UsersService {
        User newUser = User.builder()
                .email(userForm.getEmail())
                .name(userForm.getName())
+               .hashPassword(passwordEncoder.encode(userForm.getHashPassword()))
                .build();
         usersRepository.save(newUser);
         return from(newUser);
