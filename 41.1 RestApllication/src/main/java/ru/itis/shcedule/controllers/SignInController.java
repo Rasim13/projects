@@ -8,7 +8,6 @@ import ru.itis.shcedule.dto.AuthDto;
 import ru.itis.shcedule.dto.TokenDto;
 import ru.itis.shcedule.services.SignInService;
 
-
 import javax.annotation.security.PermitAll;
 
 @RestController

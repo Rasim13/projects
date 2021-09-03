@@ -46,3 +46,13 @@ Content-Type: application/json
   "hashPassword" : "Qwerty001"
 }
 
+###
+
+GET localhost/users/events/time
+Content-Type: application/json
+
+{
+"date" : "2021-09-30",
+"users" : [ {"id" : 1}, {"id" : 2}]
+}
+

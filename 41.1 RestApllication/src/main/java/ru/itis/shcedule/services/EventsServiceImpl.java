@@ -53,8 +53,8 @@ public class EventsServiceImpl implements EventsService {
 
         User user = null;
         Event newEvent = null;
-
         List<User> users = event.getUsers();
+
         for (User findUser: users) {
             user = usersRepository.findById(findUser.getId()).orElseThrow(IllegalArgumentException::new);
 

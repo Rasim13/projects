@@ -15,6 +15,7 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@ToString(exclude = "user")
 public class User {
 
     public enum State {
