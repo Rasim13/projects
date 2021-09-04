@@ -1,0 +1,32 @@
+GET localhost:8080/api/v1/customers/1
+
+###
+
+POST localhost:8080/api/v1/customers/
+Content-Type: application/json
+
+{ "firstName" : "Anton",
+  "lastName" : "Petrov",
+  "address" : "Moscow, novosele 6",
+  "budget" : 15000
+}
+
+###
+
+PUT localhost:8080/api/v1/customers/
+Content-Type: application/json
+
+{ "id": 3,
+  "firstName" : "Anton",
+  "lastName" : "Petrov",
+  "address" : "Moscow, novosele 6",
+  "budget" : 20000
+}
+
+###
+
+DELETE localhost:8080/api/v1/customers/3
+
+###
+
+ GET localhost:8080/api/v1/customers/
