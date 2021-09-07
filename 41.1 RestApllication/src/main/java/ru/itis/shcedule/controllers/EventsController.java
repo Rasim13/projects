@@ -16,13 +16,15 @@ public class EventsController {
     @Autowired
     private EventsService eventsService;
 
-    @ApiOperation(value = "Добавление события")
+    @ApiOperation(value = "Добавление события пользователю")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Успешно добавлено", response = EventDto.class)})
     @PostMapping("/events/{user-id}")
     public EventDto addEventToUser(@RequestBody EventForm event, @PathVariable("user-id") Long userId) {
         return eventsService.addEventToUser(event, userId);
     }
 
+    @ApiOperation(value = "Добавление события нескольким пользователям")
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "Успешно добавлено", response = EventDto.class)})
     @PostMapping("/events")
     public EventDto addEventToSeveralUsers(@RequestBody EventForm event) {
         return eventsService.addEventToSeveralUsers (event);
