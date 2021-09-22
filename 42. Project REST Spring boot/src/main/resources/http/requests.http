@@ -1,0 +1,51 @@
+POST localhost/users
+Content-Type: application/json
+
+{
+  "firstName" : "Расим",
+  "lastName" : "Замалтдинов",
+  "birthday" : "1995-06-25",
+  "email" : "rasim@gmail.com",
+  "hashPassword" : "qwerty002",
+  "address" : "Казань, ул. Ямашева 13",
+  "aboutMyself" : "Я инженер"
+}
+
+###
+
+GET localhost/users
+Authorization: b696dff9-dd10-4dd5-ab70-e7d8751192d3
+
+###
+
+POST localhost/signIn
+Content-Type: application/json
+
+{
+  "email" : "rasim@gmail.com",
+  "hashPassword" : "qwerty002"
+}
+
+###
+
+PUT localhost/users/8
+Content-Type: application/json
+Authorization: b696dff9-dd10-4dd5-ab70-e7d8751192d3
+
+{
+  "email" : "rasimzamaltdinov@gmail.com"
+}
+
+###
+
+DELETE localhost/users/6
+Authorization: b696dff9-dd10-4dd5-ab70-e7d8751192d3
+
+###
+
+GET localhost/users/firstName?firstName = н
+
+
+
+
+
