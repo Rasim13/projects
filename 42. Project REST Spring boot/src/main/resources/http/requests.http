@@ -1,20 +1,20 @@
-POST localhost/users
+POST localhost/api/users
 Content-Type: application/json
 
 {
-  "firstName" : "Расим",
-  "lastName" : "Замалтдинов",
-  "birthday" : "1995-06-25",
-  "email" : "rasim@gmail.com",
-  "hashPassword" : "qwerty002",
-  "address" : "Казань, ул. Ямашева 13",
-  "aboutMyself" : "Я инженер"
+  "firstName" : "Фарид",
+  "lastName" : "Салихов",
+  "birthday" : "1995-08-25",
+  "email" : "farid@gmail.com",
+  "hashPassword" : "qwerty003",
+  "address" : "Казань, ул. Ибрагимова",
+  "aboutMyself" : "Я студент"
 }
 
 ###
 
 GET localhost/users
-Authorization: b696dff9-dd10-4dd5-ab70-e7d8751192d3
+Authorization: 25dd61f5-a613-4a60-9039-9426b704acd3
 
 ###
 
@@ -22,28 +22,25 @@ POST localhost/signIn
 Content-Type: application/json
 
 {
-  "email" : "rasim@gmail.com",
-  "hashPassword" : "qwerty002"
+  "email" : "farid@gmail.com",
+  "hashPassword" : "qwerty003"
 }
 
 ###
 
-PUT localhost/users/8
+PUT localhost/users/12
 Content-Type: application/json
-Authorization: b696dff9-dd10-4dd5-ab70-e7d8751192d3
+Authorization: 25dd61f5-a613-4a60-9039-9426b704acd3
 
 {
-  "email" : "rasimzamaltdinov@gmail.com"
+  "address" : "Казань, ул. Короленко 45"
 }
 
 ###
 
-DELETE localhost/users/6
-Authorization: b696dff9-dd10-4dd5-ab70-e7d8751192d3
+DELETE localhost/users/11
+Authorization: 25dd61f5-a613-4a60-9039-9426b704acd3
 
-###
-
-GET localhost/users/firstName?firstName = н
 
 
 

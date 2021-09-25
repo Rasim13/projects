@@ -13,6 +13,10 @@ import ru.itis.manageUsers.repositories.UsersRepository;
 import java.util.Optional;
 import java.util.UUID;
 
+/**
+ * Реализация интерфейса авторизации пользователя
+ */
+
 @Service
 public class SignInServiceImpl implements SignInService {
 

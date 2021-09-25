@@ -12,6 +12,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Вспомогательный класс, для передачи данных о пользователе между подсистемами
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,6 +31,9 @@ public class UserDto {
     private String address;
     private String aboutMyself;
 
+    /**
+     * Метод возвращает объект пользотвателя
+     */
     public static UserDto from(User user) {
         return UserDto.builder()
                 .id(user.getId())
@@ -39,6 +45,9 @@ public class UserDto {
                 .build();
     }
 
+    /**
+     * Метод возвращает список пользователей
+     */
     public static List<UserDto> from(List<User> users) {
         return users.stream().map(UserDto::from).collect(Collectors.toList());
     }

@@ -1,28 +1,27 @@
 package ru.itis.manageUsers.utils;
 
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
-import ru.itis.manageUsers.dto.UserDto;
 import ru.itis.manageUsers.models.User;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Вспомогательный класс, позволяющий загрузить данные о пользователе
+ */
+
 public class ExcelHelper {
 
-    public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-    static String[] HEADERS = {"FirstName", "LastName"};
-    static String SHEET = "users";
+    private static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+    private static String SHEET = "users";
 
     public static boolean hasExcelFormat(MultipartFile file) {
 
@@ -76,23 +75,10 @@ public class ExcelHelper {
                             break;
 
                         case 2:
-                            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-                            String dateInString = currentCell.getStringCellValue();
-
-                            try {
-                                Date date = formatter.parse(dateInString);
-                                user.setBirthday(date);
-                            } catch (ParseException e) {
-                                throw new IllegalArgumentException();
-                            }
-
-                            break;
-
-                        case 3:
                             user.setAddress(currentCell.getStringCellValue());
                             break;
 
-                        case 4:
+                        case 3:
                             user.setAboutMyself(currentCell.getStringCellValue());
                             break;
 

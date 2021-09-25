@@ -1,9 +1,11 @@
 package ru.itis.manageUsers.forms;
 
 import lombok.Data;
-
-import java.time.LocalDate;
 import java.util.Date;
+
+/**
+ * Класс, для получения входных данных о пользователе
+ */
 
 @Data
 public class UserForm {

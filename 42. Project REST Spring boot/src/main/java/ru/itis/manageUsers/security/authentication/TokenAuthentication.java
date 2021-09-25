@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
-// показывает аутентификацию пользователя
+// Класс для создания объекта аутентификации
 public class TokenAuthentication implements Authentication {
 
     private String value;

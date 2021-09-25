@@ -13,6 +13,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
+//Класс для перехвативания токена
 @Component("tokenAuthenticationFilter")
 public class TokenAuthenticationFilter extends GenericFilterBean {
     @Override

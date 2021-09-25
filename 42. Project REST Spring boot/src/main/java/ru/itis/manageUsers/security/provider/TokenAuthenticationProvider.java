@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 import ru.itis.manageUsers.security.authentication.TokenAuthentication;
 
+// Класс для аутентификации пользователя
 @Component
 public class TokenAuthenticationProvider implements AuthenticationProvider {
 

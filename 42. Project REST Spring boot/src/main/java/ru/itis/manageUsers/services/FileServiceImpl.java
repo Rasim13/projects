@@ -13,12 +13,19 @@ import java.util.List;
 
 import static ru.itis.manageUsers.dto.UserDto.from;
 
+/**
+ * Реализация интерфейса загрузки данных по пользователе из файла excel
+ */
+
 @Service
 public class FileServiceImpl implements FileService {
 
     @Autowired
     private UsersRepository usersRepository;
 
+    /**
+     * Метод сохраняет список пользователей
+     */
     @Override
     public List<UserDto> save(MultipartFile file) {
         try {

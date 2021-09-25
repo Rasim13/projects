@@ -12,6 +12,9 @@ import java.util.List;
 
 import static ru.itis.manageUsers.dto.UserDto.from;
 
+/**
+ * Реализация интерфейса управления пользователем
+ */
 @Service
 public class UserServiceImpl implements UserService {
 
