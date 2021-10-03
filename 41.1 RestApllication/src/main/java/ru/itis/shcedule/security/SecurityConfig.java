@@ -16,12 +16,20 @@ import javax.servlet.Filter;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    @Autowired
-    private AuthenticationProvider tokenAuthenticationProvider;
+
+//    @Autowired
+//    private AuthenticationProvider tokenAuthenticationProvider;
 
     @Autowired
-    @Qualifier("tokenFilterAuthentication")
-    private Filter tokenAuthenticationFilter;
+    private AuthenticationProvider jwtAuthenticationProvider;
+
+//    @Autowired
+//    @Qualifier("tokenFilterAuthentication")
+//    private Filter tokenAuthenticationFilter;
+
+    @Autowired
+    @Qualifier("jwtFilterAuthentication")
+    private Filter jwtAuthenticationFilter;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -29,12 +37,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.formLogin().disable();
         http.logout().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.addFilterBefore(tokenAuthenticationFilter, BasicAuthenticationFilter.class);
+        http.addFilterBefore(jwtAuthenticationFilter, BasicAuthenticationFilter.class);
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(tokenAuthenticationProvider);
+        auth.authenticationProvider(jwtAuthenticationProvider);
     }
 
 }

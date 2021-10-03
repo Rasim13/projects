@@ -54,6 +54,7 @@ public class UsersController {
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Успешно выполнено", response = TimeDto.class)})
     @GetMapping(value = "/users/events/time", produces = MediaType.APPLICATION_JSON_VALUE)
     public TimeDto getEventsSeveralUsers(@RequestBody Time time) {
-        return usersService.getGeneralTime(time);
+        return null;
+//        return usersService.getGeneralTime(time);
     }
 }

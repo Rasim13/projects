@@ -11,7 +11,6 @@ import ru.itis.shcedule.repositories.UsersRepository;
 
 import java.util.List;
 
-
 import static ru.itis.shcedule.dto.EventDto.from;
 
 @Service

@@ -13,6 +13,7 @@ public interface UsersRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByTokens_Value(String value);
 
-    List<Event> findByUser(User user);
+    Optional<User> findByJwtTokens_Value(String value);
 
+//    List<Event> findByUser(User user);
 }

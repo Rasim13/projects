@@ -13,8 +13,12 @@ import ru.itis.shcedule.services.EventsService;
 @RestController
 public class EventsController {
 
-    @Autowired
     private EventsService eventsService;
+
+    @Autowired
+    public EventsController(EventsService eventsService) {
+        this.eventsService = eventsService;
+    }
 
     @ApiOperation(value = "Добавление события пользователю")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Успешно добавлено", response = EventDto.class)})

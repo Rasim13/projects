@@ -1,0 +1,15 @@
+package ru.itis.shcedule.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class JWTTokenDto {
+
+    private String jwtValue;
+}

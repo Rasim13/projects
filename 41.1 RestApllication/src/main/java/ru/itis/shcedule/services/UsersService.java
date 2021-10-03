@@ -15,7 +15,7 @@ public interface UsersService {
 
     UserDto addUser(UserForm user);
 
-    TimeDto getGeneralTime(Time time);
+//    TimeDto getGeneralTime(Time time);
 
 //    List<TimeDto> getTimeByUsers(TimeForm timeForm);
 }

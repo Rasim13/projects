@@ -54,52 +54,52 @@ public class UsersServiceImpl implements UsersService {
         return from(newUser);
     }
 
-    @Override
-    public TimeDto getGeneralTime(Time time) {
-        User user = null;
-        List<Event> findEventUser = null;
-        List<User> users = time.getUsers();
+//    @Override
+//    public TimeDto getGeneralTime(Time time) {
+//        User user = null;
+//        List<Event> findEventUser = null;
+//        List<User> users = time.getUsers();
+//
+//        for (User findUser : users) {
+//            user = usersRepository.findById(findUser.getId()).orElseThrow(IllegalArgumentException::new);
+//            if (user == null) {
+//                throw new IllegalArgumentException();
+//            }
+//        }
+//
+//        TimeDto timeDto = findGeneralTime(time, user);
+//
+//        return timeDto;
+//    }
 
-        for (User findUser : users) {
-            user = usersRepository.findById(findUser.getId()).orElseThrow(IllegalArgumentException::new);
-            if (user == null) {
-                throw new IllegalArgumentException();
-            }
-        }
-
-        TimeDto timeDto = findGeneralTime(time, user);
-
-        return timeDto;
-    }
-
-    private TimeDto findGeneralTime(Time time, User user) {
-
-        List<Event> eventList = usersRepository.findByUser(user);
-
-        LocalDate dateFromJson = time.getDate();
-
-        for (Event event1: eventList)
-            if (!dateFromJson.isEqual(event1.getDate())) {
-                throw new IllegalArgumentException("Not same date");
-            } else {
-                for (Event firstUser: eventList) {
-
-                    for (Event secondUser: eventList) {
-
-                        if (firstUser.getStartTime().equals(secondUser.getStartTime())
-                                && firstUser.getFinishTime().equals(secondUser.getFinishTime())) {
-                            throw new IllegalArgumentException("There is same time");
-                        } else {
-                            return TimeDto.builder()
-                                    .freeTime(firstUser.getFinishTime())
-                                    .build();
-                        }
-                    }
-
-                }
-            }
-
-        return null;
-        }
+//    private TimeDto findGeneralTime(Time time, User user) {
+//
+//        List<Event> eventList = usersRepository.findByUser(user);
+//
+//        LocalDate dateFromJson = time.getDate();
+//
+//        for (Event event1: eventList)
+//            if (!dateFromJson.isEqual(event1.getDate())) {
+//                throw new IllegalArgumentException("Not same date");
+//            } else {
+//                for (Event firstUser: eventList) {
+//
+//                    for (Event secondUser: eventList) {
+//
+//                        if (firstUser.getStartTime().equals(secondUser.getStartTime())
+//                                && firstUser.getFinishTime().equals(secondUser.getFinishTime())) {
+//                            throw new IllegalArgumentException("There is same time");
+//                        } else {
+//                            return TimeDto.builder()
+//                                    .freeTime(firstUser.getFinishTime())
+//                                    .build();
+//                        }
+//                    }
+//
+//                }
+//            }
+//
+//        return null;
+//        }
     }
 
