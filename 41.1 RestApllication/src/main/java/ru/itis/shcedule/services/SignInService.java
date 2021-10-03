@@ -1,9 +1,8 @@
 package ru.itis.shcedule.services;
 
 import ru.itis.shcedule.dto.AuthDto;
-import ru.itis.shcedule.dto.JWTTokenDto;
+import ru.itis.shcedule.dto.TokenDto;
 
 public interface SignInService {
-//    TokenDto signIn(AuthDto auth);
-    JWTTokenDto signIn(AuthDto auth);
+    TokenDto signIn(AuthDto auth);
 }

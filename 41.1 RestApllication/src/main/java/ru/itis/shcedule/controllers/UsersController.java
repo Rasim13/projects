@@ -30,10 +30,6 @@ public class UsersController {
         return usersService.getUsers();
     }
 
-//    @GetMapping(value = "/user/{user-id}/events", produces = MediaType.APPLICATION_JSON_VALUE)
-//    public List<EventDto> getEventsByUser(@PathVariable("user-id") Long userId) {
-//        return usersService.getEventsByUser(userId);
-//    }
 
     @ApiOperation(value = "Добавление пользователя")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Успешно добавлено", response = UserDto.class)})
@@ -54,7 +50,6 @@ public class UsersController {
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Успешно выполнено", response = TimeDto.class)})
     @GetMapping(value = "/users/events/time", produces = MediaType.APPLICATION_JSON_VALUE)
     public TimeDto getEventsSeveralUsers(@RequestBody Time time) {
-        return null;
-//        return usersService.getGeneralTime(time);
+        return usersService.getGeneralTime(time);
     }
 }

@@ -16,23 +16,9 @@ public class AccountUserDetailService implements UserDetailsService {
     @Autowired
     private UsersRepository usersRepository;
 
-//    @Override
-//    public UserDetails loadUserByUsername(String token) throws UsernameNotFoundException {
-//        Optional<User> userOptional = usersRepository.findByTokens_Value(token);
-//
-//        if (userOptional.isPresent()) {
-//            User user = userOptional.get();
-//            return new AccountUserDetails(user);
-//
-//        } else {
-//            throw new UsernameNotFoundException("User not found");
-//        }
-//    }
-
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-
-        Optional<User> userOptional = usersRepository.findByEmail(email);
+    public UserDetails loadUserByUsername(String token) throws UsernameNotFoundException {
+        Optional<User> userOptional = usersRepository.findByTokens_Value(token);
 
         if (userOptional.isPresent()) {
             User user = userOptional.get();
@@ -42,4 +28,6 @@ public class AccountUserDetailService implements UserDetailsService {
             throw new UsernameNotFoundException("User not found");
         }
     }
+
+
 }
