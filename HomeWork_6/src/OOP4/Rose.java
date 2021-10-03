@@ -21,7 +21,7 @@ public class Rose extends Flower {
         int length = values.length;
         Country c1 = values[0];
 
-        Rose rose = new Rose(index, 10, 4500);
+//        Rose rose = new Rose(index, 10, 4500);
     }
 
     private int getCountry() {
