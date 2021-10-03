@@ -1,0 +1,65 @@
+GET localhost/users
+Authorization: "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ2YWRpbUBnbWFpbC5jb20ifQ.i6-ZacowMiEeg43OxxGRv0FQjFlZTbNkLvgVlYqhw4uEr9QEPKw92lWAczrE0V6zqPugYzRCV0YOhVN4VyPl9A"
+
+
+###
+
+POST localhost/users
+Content-Type: application/json
+
+{
+  "name" : "Вадим",
+  "email" : "vadim@gmail.com",
+  "hashPassword" : "Qwerty001"
+}
+
+###
+
+POST localhost/events/2
+Content-Type: application/json
+
+{
+  "date" : "2021-08-23",
+  "startTime" : "14:30:00",
+  "finishTime" : "14:40:00",
+  "nameOfTheEvent" : "go to work"
+}
+
+###
+
+POST localhost/events
+Content-Type: application/json
+
+{
+"date" : "2021-09-30",
+"startTime" : "11:15:00",
+"finishTime" : "11:35:00",
+"nameOfTheEvent" : "go to market",
+"users" : [ {"id" : 2}]
+}
+
+###
+POST localhost/signIn
+Content-Type: application/json
+
+{
+  "email" : "vadim@gmail.com",
+  "hashPassword" : "Qwerty001"
+}
+
+###
+
+GET localhost/users/events/time
+Content-Type: application/json
+
+{
+"date" : "2021-09-30",
+"users" : [ {"id" : 1}, {"id" : 2}]
+}
+
+###
+
+GET localhost/user/14/events
+Authorization: "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ2YWRpbUBnbWFpbC5jb20ifQ.i6-ZacowMiEeg43OxxGRv0FQjFlZTbNkLvgVlYqhw4uEr9QEPKw92lWAczrE0V6zqPugYzRCV0YOhVN4VyPl9A"
+
+
