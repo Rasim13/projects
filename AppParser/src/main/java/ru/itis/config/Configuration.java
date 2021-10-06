@@ -22,10 +22,8 @@ public class Configuration {
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-        // сделать адаптер для Hibernate
         HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
         adapter.setDatabase(Database.POSTGRESQL);
-
         LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactory.setJpaVendorAdapter(adapter);
         entityManagerFactory.setDataSource(dataSource());

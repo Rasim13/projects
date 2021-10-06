@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 
+
 @Data
 @Entity
 @Table(name ="unique_words")
@@ -19,4 +20,5 @@ public class UniqueWords {
 
     @Column(name = "amount_of_word")
     private Integer amountOfWord;
+
 }
