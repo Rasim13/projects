@@ -6,7 +6,7 @@ public class Phone {
 
     private String model;
 
-    public Phone(String model) {
+    private Phone(String model) {
         this.model = model;
     }
 
