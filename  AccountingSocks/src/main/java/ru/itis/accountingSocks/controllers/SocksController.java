@@ -12,7 +12,6 @@ public class SocksController {
     @Autowired
     private SocksService socksService;
 
-
     @PostMapping("api/socks/income")
     public SocksDto addSocks(@RequestBody SocksForm socks) {
         return socksService.addSocks(socks);
