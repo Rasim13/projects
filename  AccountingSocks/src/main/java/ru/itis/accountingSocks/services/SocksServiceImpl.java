@@ -18,29 +18,30 @@ public class SocksServiceImpl implements SocksService {
     @Override
     public SocksDto addSocks(SocksForm socks) {
 
+
         Socks socksFromDb = socksRepository.findByColorAndCottonPart(socks.getColor(), socks.getCottonPart());
 
         if (socksFromDb != null) {
-
                 socksFromDb.setColor(socks.getColor());
                 socksFromDb.setCottonPart(socks.getCottonPart());
                 socksFromDb.setQuantity(socksFromDb.getQuantity() + socks.getQuantity());
                 socksRepository.save(socksFromDb);
                 return from(socksFromDb);
-
         }
 
-        Socks newSocks = new Socks();
+        Socks newSocks = null;
 
-        if (socks.getQuantity() > 0) {
+        if (socks.getQuantity() > 0 && socks.getCottonPart() > 0 && socks.getCottonPart() <= 100) {
+            newSocks = new Socks();
             newSocks.setQuantity(socks.getQuantity());
+            newSocks.setCottonPart(socks.getCottonPart());
+            newSocks.setColor(socks.getColor());
+            socksRepository.save(newSocks);
+
+        } else {
+            throw new IllegalArgumentException("Entered wrong data");
         }
 
-        if (socks.getCottonPart() > 0 && socks.getCottonPart() <= 100) {
-            newSocks.setCottonPart(socks.getCottonPart());
-        }
-        newSocks.setColor(socks.getColor());
-        socksRepository.save(newSocks);
         return from(newSocks);
     }
 
