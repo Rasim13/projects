@@ -2,6 +2,7 @@ package multithreading.example5;
 
 public class VolatileEx extends Thread {
 
+    // volatile позволяет хранить переменную в  main memory.
     volatile boolean b = true;
 
     @Override
