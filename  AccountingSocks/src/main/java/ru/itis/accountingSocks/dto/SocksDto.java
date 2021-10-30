@@ -23,14 +23,9 @@ public class SocksDto {
     public static SocksDto from(Socks socks) {
         return SocksDto.builder()
                 .id(socks.getId())
-                .color(socks.getColor().toString())
+                .color(socks.getColor())
                 .cottonPart(socks.getCottonPart())
                 .quantity(socks.getQuantity())
                 .build();
     }
-
-    public static List<SocksDto> from(List<Socks> socks) {
-        return socks.stream().map(SocksDto::from).collect(Collectors.toList());
-    }
-
 }

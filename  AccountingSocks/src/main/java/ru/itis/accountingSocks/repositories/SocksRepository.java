@@ -4,9 +4,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import ru.itis.accountingSocks.models.Socks;
 
+import java.util.Optional;
+
 public interface SocksRepository extends JpaRepository<Socks, Long> {
 
-    Socks findByColorAndCottonPart(String color, Integer cottonPart);
+    Optional<Socks> findByColorAndCottonPart(String color, Integer cottonPart);
 
     @Query(value = "SELECT sum(s.quantity) FROM SOCKS s where s.color= :color AND s.cotton_part> :cottonPart",nativeQuery = true)
     int getQuantitySocksByColorEqualAndCottonPartMoreThan(String color, int cottonPart);

@@ -2,7 +2,7 @@ POST localhost/api/socks/outcome
 Content-Type: application/json
 
 {
-  "color" : "black",
+  "color" : "red",
   "quantity" : 11,
   "cottonPart" : 20
 }
@@ -13,8 +13,8 @@ POST localhost/api/socks/income
 Content-Type: application/json
 
 {
-  "color" : "black",
-  "quantity" : 30,
+  "color" : "red",
+  "quantity" : 10,
   "cottonPart" : 20
 }
 
