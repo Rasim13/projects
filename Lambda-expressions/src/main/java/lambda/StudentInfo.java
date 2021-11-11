@@ -2,16 +2,16 @@ package lambda;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class StudentInfo {
 
-    void testStudents(List<Student> al, StudentChek sc) {
+    void testStudents(List<Student> al, Predicate<Student> pr) {
         for (Student s : al) {
-            if (sc.check(s)) {
+            if (pr.test(s)) {
                 System.out.println(s);
             }
         }
-
     }
 
 }
@@ -46,9 +46,9 @@ public class StudentInfo {
         }
     }
 
-interface StudentChek {
-    boolean check(Student s);
-}
+//interface StudentChek {
+//    boolean check(Student s);
+//}
 
 
 
